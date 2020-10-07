@@ -1,4 +1,4 @@
-# testingwebsite
+# gamefreetime
 
 ## Project setup
 ```
