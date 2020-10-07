@@ -1,12 +1,13 @@
-// Include it and extract some methods for convenience
-const server = require('server');
-const { get, post } = server.router;
+const express = require("express")
+const serverStatic = require('serve-static')
+const path = require('path')
+const { log } = require("console")
 
-// Launch server with options and a couple of routes
-server({ port: 8080 }, [
-  get('/', ctx => 'Hello world'),
-  post('/', ctx => {
-    console.log(ctx.data);
-    return 'ok';
-  })
-]);
+const app = express()
+
+app.use('/',serverStatic(path.join(__dirname,'/dist')))
+
+const port = process.env.PORT ||  8080
+app.listen(port)
+
+// console.log("Listening Port : " + port );
