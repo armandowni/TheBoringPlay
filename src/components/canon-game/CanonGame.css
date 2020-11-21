@@ -1,0 +1,211 @@
+body {
+    background-color: #919191;
+    margin: auto;
+    padding: auto;
+}
+
+@keyframes fadeout {
+    to {
+        opacity: 1;
+    }
+
+    from {
+        opacity: 0;
+    }
+}
+
+.tombolExit .btn_help {
+    /* Clean style */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    color: black;
+    cursor: pointer;
+    /* Clean style */
+
+    --button-text-color: var(--background-color);
+    --button-text-color-hover: var(--button-background-color);
+    /* --border-color: #7d8082; */
+    --button-background-color: black;
+    --highlight-color: rgb(200, 255, 0);
+    --button-inner-border-color: transparent;
+    --button-bits-color: var(--background-color);
+    --button-bits-color-hover: var(--button-background-color);
+
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    /* transform: translate(10%, -50%); */
+    padding: 8px;
+    /* margin-bottom: 20px; */
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 40px;
+    transition: all 0.15s ease;
+}
+
+.btn::before,
+.btn::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: calc(50% - 5px);
+    border: 1px solid var(--border-color);
+    transition: all 0.15s ease;
+}
+
+.btn::before {
+    top: 0;
+    border-bottom-width: 0;
+}
+
+.btn::after {
+    bottom: 0;
+    border-top-width: 0;
+}
+
+.btn:active,
+.btn:focus {
+    outline: none;
+}
+
+.btn:active::before,
+.btn:active::after {
+    right: 3px;
+    left: 3px;
+}
+
+.btn:active::before {
+    top: 3px;
+}
+
+.btn:active::after {
+    bottom: 3px;
+}
+
+.btn__slide {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -8px;
+    width: 0;
+    background-color: var(--highlight-color);
+    transform: skew(-15deg);
+    transition: all 0.2s ease;
+}
+
+.btn__content {
+    position: relative;
+}
+
+.btn:hover {
+    color: var(--button-text-color-hover);
+}
+
+.btn:hover .btn__slide {
+    width: calc(100% + 15px);
+}
+
+.btn:hover .btn__inner::after {
+    background-color: var(--button-bits-color-hover);
+}
+
+.title {
+    position: relative;
+    top: 5%;
+    left: 5%;
+    /* -ms-transform: translate(-50%, -50%); */
+    transform: translate(-20%, -5%);
+    text-transform: uppercase;
+    font-family: verdana;
+    text-align: center;
+    font-size: 40pt;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191,
+        1px 4px 1px #919191, 1px 5px 1px #919191, 1px 6px 1px #919191,
+        1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191,
+        1px 10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4),
+        1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
+        1px 30px 60px rgba(16, 16, 16, 0.4);
+}
+
+/* thegame */
+.theGame {
+    margin: 60px 0px;
+}
+
+canvas {
+    background-image: url("../TheGame/image/download.png");
+}
+
+.userBtn {
+    /* position: relative;
+    top: 80%;
+    left: 15%; */
+    width: auto;
+    border: 1px solid black;
+    padding: 10px 5px;
+    /* padding-top: 10px; */
+    background-color: aqua;
+}
+
+.userBtn .alert {
+    padding: 0px 10px;
+    margin: 0px;
+}
+
+.userBtn ul {
+    padding-left: 5px;
+}
+
+.userBtn ul li {
+    list-style: none;
+    display: inline;
+}
+
+.score{
+    margin: 60px 90px;
+}
+.highScores {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    padding: 0px 20px;
+    background-color: white;
+}
+
+.highScores h1 {
+    text-align: center;
+}
+
+.HighScore tr td {
+    padding: 5px 20px;
+}
+
+@media  (max-width: 768.98px) {
+    .game{
+        margin: 0px 80px;
+    }
+    .userBtn{
+        width: 500px;
+    }
+    .highScores{
+        width: 300px;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .score{
+        margin: 60px 60px;
+    }
+    canvas{
+        width: 500px;
+    }
+}

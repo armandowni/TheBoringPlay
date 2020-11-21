@@ -1,0 +1,6 @@
+{
+  "viewDestination": "./src/components",
+  "storeDestination": "./src/store/module/",
+  "componentDestination": "./src/components",
+  "templatePath": ""
+}
