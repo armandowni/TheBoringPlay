@@ -1,9 +1,3 @@
-body {
-    background-color: #919191;
-    margin: auto;
-    padding: auto;
-}
-
 @keyframes fadeout {
     to {
         opacity: 1;
@@ -119,9 +113,9 @@ body {
 .title {
     position: relative;
     top: 5%;
-    left: 5%;
+    left: 50%;
     /* -ms-transform: translate(-50%, -50%); */
-    transform: translate(-20%, -5%);
+    transform: translate(-50%, -50%);
     text-transform: uppercase;
     font-family: verdana;
     text-align: center;
@@ -142,7 +136,7 @@ body {
 }
 
 canvas {
-    background-image: url("../TheGame/image/download.png");
+    background-image: url("../../../assets/image/download.png");
 }
 
 .userBtn {

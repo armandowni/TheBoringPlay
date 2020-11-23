@@ -5,14 +5,11 @@
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-.header{
-  /* position: sticky; */
-  margin: auto;
-}
+
 .judul .text{
   position: relative;
   top: 50%;
-  /* left: 50%; */
+  left: 1%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-transform: uppercase;
@@ -27,11 +24,6 @@
     1px 10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4),
     1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
     1px 30px 60px rgba(16, 16, 16, 0.4);
-}
-
-.dropdown-menu {
-  width: auto;
-  height: auto;
 }
 
 section {
@@ -50,35 +42,17 @@ section {
 
 
 
-@media (max-width: 576.98px) {
-  .navbar-collapse {
-    position: absolute;
-    top: 54px;
-    left: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    width: 100%;
-    transition: all 0.4s ease;
-    display: block;
-  }
-  .navbar-collapse.collapsing {
-    height: auto !important;
-    margin-left: 50%;
-    left: 50%;
-    transition: all 0.2s ease;
-  }
-  .navbar-collapse.show {
-    left: 0;
-    background-color: #007bff;
-  }
-  
+@media (max-width: 375.98px) {
   .container{
-    position: absolute;
-    top: 55%;
+    position: relative;
+    top: 90%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+  }
+  section {
+    margin: 10px 0px;
+    /* margin-bottom: 10px; */
   }
   .judul .text{
     font-size: 30pt;
