@@ -1,12 +1,4 @@
-.container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
-.judul .text{
+.judul .text {
   position: relative;
   top: 50%;
   left: 1%;
@@ -26,41 +18,28 @@
     1px 30px 60px rgba(16, 16, 16, 0.4);
 }
 
-section {
-  margin: 10px 0px;
-  margin-bottom: 70px;
-}
-
 .playGame button {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -10%);
   padding: 20px 60px;
 }
 
-
-
-@media (max-width: 375.98px) {
-  .container{
-    position: relative;
-    top: 90%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-  section {
-    margin: 10px 0px;
-    /* margin-bottom: 10px; */
-  }
-  .judul .text{
-    font-size: 30pt;
+@media (max-width: 425.98px) {
+  .judul .text {
+      position: relative;
+      top: 100px;
+      left: 1%;
+      font-size: 30pt;
   }
 }
-
-@media (max-width: 767.98px) {
-  .judul .text{
-    font-size: 40pt;
+@media (min-width: 500.98px){
+  .judul .text {
+      position: relative;
+      top: 100%;
+      left: 1%;
+      font-size: 40pt;
   }
 }

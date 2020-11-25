@@ -45,42 +45,21 @@ export default {
 </script>
 
 <style>
+/* @import url('./assets/css/styleMobile.css'); */
+@import url('./assets/css/styleTablet.css');
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* margin-top: 60px; */
 }
-.header{
-  /* position: sticky; */
-  margin: auto;
+.container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
-
-@media (max-width: 375.98px) {
-  .navbar-collapse {
-    position: absolute;
-    top: 54px;
-    left: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    width: 100%;
-    transition: all 0.4s ease;
-    display: block;
-  }
-  .navbar-collapse.collapsing {
-    height: auto !important;
-    margin-left: 50%;
-    left: 50%;
-    transition: all 0.2s ease;
-  }
-  .navbar-collapse.show {
-    left: 0;
-    background-color: #007bff;
-  }
-}
-
 
 </style>

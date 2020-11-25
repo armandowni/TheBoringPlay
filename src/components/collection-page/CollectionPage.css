@@ -1,59 +1,24 @@
-.game img{
-    width: 55px;
-    height: 100px;
-}
-.game img,button{
-    margin: 10px 0px;
+.game img {
+  width: 55px;
+  height: 100px;
 }
 
-@media (max-width: 375.98px) {
-    .navbar-collapse {
-      position: absolute;
-      top: 54px;
-      left: 100%;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-bottom: 15px;
-      width: 100%;
-      transition: all 0.4s ease;
-      display: block;
-    }
-    .navbar-collapse.collapsing {
-      height: auto !important;
-      margin-left: 50%;
-      left: 50%;
-      transition: all 0.2s ease;
-    }
-    .navbar-collapse.show {
-      left: 0;
-      background-color: #007bff;
-    }
-    
-    .container{
-      position: absolute;
-      top: 70%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-    }
-    .judul .text{
-      font-size: 30pt;
-    }
+.game img,
+button {
+  margin: 10px 0px;
+}
+
+
+@media (max-width: 425.98px) {
+  .gameRow{
+    width: 20%;
   }
-  
-  @media (max-width: 767.98px) {
-    .judul .text{
+}
+/* @media (min-width: 500.98px){
+  .judul .text {
+      position: relative;
+      top: 100%;
+      left: 1%;
       font-size: 40pt;
-    }
   }
-
-/* .container{
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    /* background-color: blue; 
 } */
-
