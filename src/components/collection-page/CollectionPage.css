@@ -1,24 +1,28 @@
-.game img {
-  width: 55px;
-  height: 100px;
+.gameContainer{
+  margin: 100px 20px;
 }
-
-.game img,
-button {
-  margin: 10px 0px;
+.gameList li{
+  margin: 0px 10px;
+  /* color: white; */
 }
-
+.gameList li a{
+  color: white;
+}
+.pagination{
+  margin: 10px 10px;
+}
 
 @media (max-width: 425.98px) {
-  .gameRow{
-    width: 20%;
+  .gameContainer{
+    margin: 100px 0px;
+  }
+  .gameList li{
+    margin: 10px 10px;
+    /* color: white; */
   }
 }
-/* @media (min-width: 500.98px){
-  .judul .text {
-      position: relative;
-      top: 100%;
-      left: 1%;
-      font-size: 40pt;
+@media (min-width: 500.98px){
+  .gameContainer{
+    margin: 100px 0px;
   }
-} */
+}

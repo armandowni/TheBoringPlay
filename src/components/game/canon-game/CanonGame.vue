@@ -1,3 +1,3 @@
 <template src="./CanonGame.html"></template>
-<style src="./CanonGame.css"></style>
+<style src="./CanonGame.css" scoped></style>
 <script src="./CanonGame.js"></script>

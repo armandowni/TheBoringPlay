@@ -53,6 +53,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0 auto;
 }
 .container{
   position: absolute;
@@ -61,5 +62,14 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+/* @media (max-width: 425.98px) {
+  .container{
+  position: relative;
+  top: 100%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+} */
 
 </style>
