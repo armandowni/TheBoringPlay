@@ -41,7 +41,7 @@
     transition: all 0.15s ease;
 }
 
-.btn::before,
+/* .btn::before,
 .btn::after {
     content: "";
     display: block;
@@ -108,11 +108,11 @@
 
 .btn:hover .btn__inner::after {
     background-color: var(--button-bits-color-hover);
-}
+} */
 
 .title {
     position: relative;
-    top: 5%;
+    top: 85px;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -128,21 +128,24 @@
         1px 10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4),
         1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
         1px 30px 60px rgba(16, 16, 16, 0.4);
+    /* margin-top: 100px; */
 }
 
 /* thegame */
 .theGame {
     margin: 60px 0px;
 }
+.game{
+    margin: 0px 50px;
+    margin-top: 5px;
+    padding: 0px 50px;
+}
 
-canvas {
+#gameCanvas {
     background-image: url("../../../assets/image/download.png");
 }
 
 .userBtn {
-    /* position: relative;
-    top: 80%;
-    left: 15%; */
     width: auto;
     border: 1px solid black;
     padding: 10px 5px;
@@ -168,10 +171,11 @@ canvas {
     margin: 60px 90px;
 }
 .highScores {
-    width: auto;
+    width: 70%;
     height: auto;
     border: 1px solid black;
     padding: 0px 20px;
+    margin: 0px 50px;
     background-color: white;
 }
 
@@ -183,7 +187,7 @@ canvas {
     padding: 5px 20px;
 }
 
-@media  (max-width: 768.98px) {
+@media  (max-width: 425.98px) {
     .game{
         margin: 0px 80px;
     }
@@ -195,11 +199,12 @@ canvas {
     }
 }
 
-@media (max-width: 1024.98px) {
+@media (min-width: 500.98px) {
     .score{
         margin: 60px 60px;
     }
-    canvas{
-        width: 500px;
+    .highScores{
+        width: 300px;
     }
+
 }

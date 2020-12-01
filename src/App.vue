@@ -45,8 +45,6 @@ export default {
 </script>
 
 <style>
-/* @import url('./assets/css/styleMobile.css'); */
-@import url('./assets/css/styleTablet.css');
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -62,14 +60,5 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* @media (max-width: 425.98px) {
-  .container{
-  position: relative;
-  top: 100%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-} */
 
 </style>
