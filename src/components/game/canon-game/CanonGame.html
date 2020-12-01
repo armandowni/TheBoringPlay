@@ -24,7 +24,7 @@
             <div class="userBtn">
                 <ul>
                     <li>Degress: <input type="number" class="inputDeg" id="inputDeg" placeholder="input degress(0-90)"
-                            v-on:change="fire()" v-on:keyup="updateCanon()"> </li>
+                            v-on:change="updateCanon()" v-on:keyup="updateCanon()"> </li>
                     <li><input type="button" id="fireBtn" value="Fire" v-on:click="fire()" style="margin-right: 20px;">
                     </li>
                     <li><input type="button" id="startBtn" value="Start Game" v-on:click="startGame()"></li>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <!-- end highscore -->
-        
+
     </div>
     <!-- end theGame -->
 </div>

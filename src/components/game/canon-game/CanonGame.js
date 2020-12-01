@@ -5,22 +5,20 @@ let myGameArea = {
     gameCanvas.width = 640;
     gameCanvas.height = 400;
     this.context = gameCanvas.getContext("2d");
-    // gamePlay.appendChild(this.canvas);
-    // document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     this.waktu = 60;
   },
   view: function (gameCanvas) {
     gameCanvas.width = 640;
     gameCanvas.height = 400;
     this.context = gameCanvas.getContext("2d");
-    // gamePlay.appendChild(this.canvas);
-    // document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     this.waktu = 60;
   },
-  clear: function () {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  clear: function (gameCanvas) {
+    this.context = gameCanvas.getContext("2d");
+    this.context.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   }
 }
+import image from '@/assets/image/bird1.png'
 
 let data = [{
   name: "IronMen",
@@ -56,7 +54,7 @@ export default {
       buttonFire: null,
       startBtn: null,
       score: 0,
-      bird: '../../assets/image/bird1.png',
+      bird: image,
 
       // character
       cannon: null,
@@ -71,42 +69,44 @@ export default {
     this.angle = document.getElementById('inputDeg')
 
     this.viewGame();
-    this.updateGameArea()
   },
   methods: {
     viewGame() {
       myGameArea.view(this.gameCanvas)
       this.angle.value = 0
       this.disabledBtn()
+      this.viewDataPlayer();
       this.utility();
-      this.viewDataPlayer()
-      this.printClock(myGameArea.waktu)
+      this.updateGameArea();
+      this.clock();
     },
     startGame() {
       this.berhenti = false
       myGameArea.start(this.gameCanvas);
-      this.enableBtn()
+      this.clock();
+      this.enableBtn();
     },
 
     // clock function
     clock() {
+      let x = this
       if (this.berhenti == false) {
         this.timer = setInterval(function () {
-          // time.clear()
-          this.printClock(myGameArea.waktu);
+          x.printClock(myGameArea.waktu);
           if (myGameArea.waktu == -1) {
             let nama = prompt("Enter your name: ")
-            this.addDataPlayer(nama, this.score)
-            // value = 0
-            this.berhenti = true
-            this.tembak = false
-            this.buttonFire.disabled = false
-            this.hit = false
-            this.printPeluru()
-            this.viewGame()
-            clearInterval(this.timer)
+            x.addDataPlayer(nama, x.score)
+            x.score = 0
+            x.berhenti = true
+            x.tembak = false
+            x.buttonFire.disabled = false
+            x.hit = false
+            x.printPeluru()
+            x.viewGame()
+            clearInterval(x.timer)
           } else {
-            this.myGameArea.waktu--
+            myGameArea.waktu--
+            // myGameArea.clear(this.gameCanvas)
           }
         }, 1000);
       } else {
@@ -115,7 +115,8 @@ export default {
 
     },
     printClock(second) {
-      // updateGameArea()
+
+      this.updateGameArea();
       this.time.text = "Time: " + second
       this.time.update()
     },
@@ -325,7 +326,7 @@ export default {
 
     // updateGameArea
     updateGameArea() {
-      // myGameArea.clear();
+      myGameArea.clear(this.gameCanvas)
       this.ground.update();
 
       // score
@@ -347,7 +348,7 @@ export default {
       this.myScore.text = "SCORE: " + score;
       this.myScore.update();
     },
-  
+
     // cannon function
     printCannonChar() {
       this.cannon.ban.update();
@@ -358,7 +359,11 @@ export default {
       let degree = this.angle.value
       if (degree > 90) {
         document.getElementById('alert').innerHTML = "You cannon input greater than 90 degree "
-      } else {
+      } 
+      else if(degree < 0){
+        document.getElementById('alert').innerHTML = "You should input greater than 0 degree "
+      }
+      else {
         document.getElementById('alert').innerHTML = ""
         this.cannon.meriam.clr()
         this.cannon.meriam.angle = (degree / 2) * -1
@@ -382,6 +387,63 @@ export default {
     printPeluru() {
       this.bullet.update()
     },
+    fire() {
+      this.buttonFire.disabled = true
+      this.tembak = true
+      this.peluru()
+    },
+    peluru() {
+      if (this.tembak == false) {
+          this.bullet.x = 80
+          this.printPeluru()
+      } else {
+        let glovar = this
+          let tembakan = setInterval(function () {
+              var myleft = glovar.bullet.x;
+              var myright = glovar.bullet.x + (glovar.bullet.width);
+              var mytop = glovar.bullet.y;
+              var mybottom = glovar.bullet.y + (glovar.bullet.height);
+              var otherleft = glovar.target.x + 15;
+              var otherright = glovar.target.x + (glovar.target.width);
+              var othertop = glovar.target.y + 15;
+              var otherbottom = glovar.target.y + (glovar.target.height);
+              var crash = true;
+              if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+                  crash = false;
+              }
+              if (glovar.bullet.x >= myGameArea.width || glovar.bullet.y >= glovar.ground.y - 10 || glovar.bullet.y <= 0) {
+                glovar.bullet.x = glovar.cannon.meriam.x
+                glovar.bullet.y = glovar.cannon.meriam.y
+                glovar.bullet.gravitySpeed = 0
+                glovar.tembak = false
+                glovar.buttonFire.disabled = false
+                glovar.printPeluru()
+                clearInterval(tembakan)
+              } else if (crash == true) {
+                  // console.log("Kena");
+                  glovar.bullet.x = glovar.cannon.meriam.x
+                  glovar.bullet.y = glovar.cannon.meriam.y
+                  glovar.bullet.gravitySpeed = 0
+                  glovar.tembak = false
+                  glovar.buttonFire.disabled = false
+                  glovar.score += 100
+                  glovar.hit = true
+
+                  // glovar.randomBurung()
+                  glovar.printPeluru()
+                  glovar.scoreUpdate(glovar.score)
+                  clearInterval(tembakan)
+              } else {
+                glovar.bullet.clr()
+                  var rotation = glovar.cannon.meriam.angle * Math.PI / 90
+                  glovar.bullet.x += Math.cos(rotation) * glovar.bullet.BulletSpeed
+                  glovar.bullet.y += Math.sin(rotation) * glovar.bullet.BulletSpeed
+                  glovar.bullet.newPos()
+                  glovar.printPeluru()
+              }
+          }, 30);
+      }
+  }
 
     // end peluru function
 
