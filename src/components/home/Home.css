@@ -1,6 +1,11 @@
-.title {
+.home{
+  width: auto;
+  height: 100vh;
+  background-image: url('../../assets/360_F_323880864_TPsH5ropjEBo1ViILJmcFHJqsBzorxUB.jpg');
+}
+.title{
   position: relative;
-  top: 5%;
+  top: 40vh;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -18,21 +23,31 @@
       1px 30px 60px rgba(16, 16, 16, 0.4);
 }
 
-.playGame button {
-  position: absolute;
-  top: 70%;
+.playGame{
+  position: relative;
+  top: 50vh;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -10%);
+  transform: translate(-50%, -50%);
+}
+.playGame button {
   padding: 20px 60px;
 }
 
 @media (max-width: 425.98px) {
-  .judul .text {
-      position: relative;
-      top: 100px;
-      left: 1%;
-      font-size: 30pt;
+  .title{
+    position: relative;
+    top: 40vh;
+    left: 50%;
+    font-size: 35pt;
+  }
+  
+  .playGame{
+    position: relative;
+    top: 30vh;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
 }
 @media (min-width: 500.98px){

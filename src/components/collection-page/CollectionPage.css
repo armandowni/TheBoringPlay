@@ -3,7 +3,6 @@
 }
 .gameList li{
   margin: 0px 10px;
-  /* color: white; */
 }
 .gameList li a{
   color: white;
@@ -16,13 +15,23 @@
   .gameContainer{
     margin: 100px 0px;
   }
+  .gameList{
+    margin-top: 100px;
+  }
   .gameList li{
     margin: 10px 10px;
-    /* color: white; */
+  }
+  .pagination{
+    margin: 10px 10px;
   }
 }
 @media (min-width: 500.98px){
   .gameContainer{
+    position: relative;
+    top: 100px;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     margin: 100px 0px;
   }
 }
