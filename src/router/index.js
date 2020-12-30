@@ -6,27 +6,31 @@ import routeGame from '../components/game/routeGame';
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/collection',
-    name: 'Collection',
-    component: collectionPage
-  }
+const routes = [{
+        path: '/',
+        name: 'Landing Page',
+        component: Home
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: Home
+    },
+    {
+        path: '/collection',
+        name: 'Collection',
+        component: collectionPage
+    }
 ]
 
 routeGame.forEach((data) => {
-  routes.push(data)
+    routes.push(data)
 })
 
 
 const router = new VueRouter({
-  mode: 'history',
-  routes
+    mode: 'history',
+    routes
 })
 
 export default router

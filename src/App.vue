@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="/">The Boring Game</a>
         <button
           class="navbar-toggler"
@@ -26,7 +26,7 @@
               <a class="nav-link" href="/collection">Game Collection</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
+              <a class="nav-link" href="#">Feedback</a>
             </li>
           </ul>
           <!-- <form class="form-inline my-2 my-lg-0">
@@ -36,10 +36,7 @@
         </div>
       </nav>
     </div>
-
-    <div class="content">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -61,13 +58,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 0 auto;
+  background-color: aqua;
+  width: auto;
+  height: 100vh;
 }
-.container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+
 </style>
