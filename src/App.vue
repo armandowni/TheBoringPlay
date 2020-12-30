@@ -52,15 +52,13 @@ export default {
 </script>
 
 <style>
+body {
+  background-image: url("../src/assets/360_F_323880864_TPsH5ropjEBo1ViILJmcFHJqsBzorxUB.jpg");
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* -moz-osx-font-smoothing: grayscale; */
   text-align: center;
-  color: #2c3e50;
-  background-color: aqua;
-  width: auto;
-  height: 100vh;
 }
-
 </style>

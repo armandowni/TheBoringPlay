@@ -1,52 +1,40 @@
-<div class="container-fluid">
-    <div class="row judul">
-        <!-- <div class="col-4 tombolExit">
-            <div class="tombolExit">
-                <button class="btn btn_help" onclick="location.href='../index.html'">
-                    <span class="btn__inner">
-                        <span class="btn__slide"></span>
-                        <span class="btn__content">Exit</span>
-                    </span>
-                </button>
+<div id="canonGame">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 id="title">Canon Game</h1>
             </div>
-        </div> -->
-        <div class="col-12 title">
-            Canon Game
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div id="gamePlay">
+                            <canvas id="gameCanvas"></canvas>
+                        </div>
+                        <div class="userBtn">
+                            <ul>
+                                <li>Degress: <input type="number" class="inputDeg" id="inputDeg" placeholder="input degress(0-90)" v-on:change="updateCanon()" v-on:keyup="updateCanon()"> </li>
+                                <li><input type="button" id="fireBtn" value="Fire" v-on:click="fire()" style="margin-right: 20px;">
+                                </li>
+                                <li><input type="button" id="startBtn" value="Start Game" v-on:click="startGame()"></li>
+                            </ul>
+                            <h4 class="alert" id="alert" style="color: red;"></h4>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="highScores">
+                            <h1>Top 10 High Scores</h1>
+                            <table class="HighScore" id="highScore">
+                                <tr>
+                                    <td>No.</td>
+                                    <td>Name</td>
+                                    <td>Score</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- theGame -->
-    <div class="row game">
-        <div class="col-6 theGame">
-            <div id="gamePlay">
-                <canvas id="gameCanvas"></canvas>
-            </div>
-            <div class="userBtn">
-                <ul>
-                    <li>Degress: <input type="number" class="inputDeg" id="inputDeg" placeholder="input degress(0-90)" v-on:change="updateCanon()" v-on:keyup="updateCanon()"> </li>
-                    <li><input type="button" id="fireBtn" value="Fire" v-on:click="fire()" style="margin-right: 20px;">
-                    </li>
-                    <li><input type="button" id="startBtn" value="Start Game" v-on:click="startGame()"></li>
-                </ul>
-                <h4 class="alert" id="alert" style="color: red;"></h4>
-            </div>
-        </div>
-
-        <!-- highscore -->
-        <div class="col-4 score">
-            <div class="highScores">
-                <h1>Top 10 High Scores</h1>
-                <table class="HighScore" id="highScore">
-                    <tr>
-                        <td>No.</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!-- end highscore -->
-
-    </div>
-    <!-- end theGame -->
 </div>

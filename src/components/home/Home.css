@@ -1,9 +1,3 @@
-.home {
-    width: auto;
-    height: 92%;
-    background-image: url('../../assets/360_F_323880864_TPsH5ropjEBo1ViILJmcFHJqsBzorxUB.jpg');
-}
-
 #judul h1 {
     padding: 100px 35px;
     color: white;
@@ -94,11 +88,6 @@ ul li {
 }
 
 @media screen and (max-width:475.98px) {
-    .home {
-        width: auto;
-        height: auto;
-        background-image: url('../../assets/360_F_323880864_TPsH5ropjEBo1ViILJmcFHJqsBzorxUB.jpg');
-    }
     #judul h1 {
         padding: 50px 40px;
         color: white;
