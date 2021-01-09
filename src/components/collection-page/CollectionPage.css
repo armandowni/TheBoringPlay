@@ -18,12 +18,9 @@
     margin: 10px 10px;
 }
 
-@media (max-width: 425.98px) {
+@media screen and (max-width: 425.98px) {
     .gameContainer {
-        margin: 100px 0px;
-    }
-    .gameList {
-        margin-top: 100px;
+        margin: 50px 0px;
     }
     .gameList li {
         margin: 10px 10px;
@@ -33,13 +30,8 @@
     }
 }
 
-@media (min-width: 500.98px) {
+@media screen and (min-width: 500.98px) {
     .gameContainer {
-        position: relative;
-        top: 100px;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
         margin: 100px 0px;
     }
 }

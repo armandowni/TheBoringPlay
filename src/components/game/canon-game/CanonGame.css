@@ -51,6 +51,11 @@
         height: 100%;
         margin: 10px 0px;
     }
+    #gameCanvas {
+        background-image: url("../../../assets/image/download.png");
+        width: 320px;
+        height: 200px;
+    }
     .highScores {
         width: 300px;
         height: auto;

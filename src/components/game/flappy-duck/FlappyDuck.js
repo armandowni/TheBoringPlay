@@ -4,22 +4,23 @@ let myGameArea = {
         this.height = gameCanvas.height = 400;
         this.context = gameCanvas.getContext("2d");
         this.frameNo = 0;
-        this.interval = 0;
+        this.interval = null;
     },
     view: function(gameCanvas) {
         gameCanvas.width = 640;
         gameCanvas.height = 400;
         this.context = gameCanvas.getContext("2d");
         this.frameNo = 0;
+        this.interval = null;
     },
     clear: function(gameCanvas) {
         this.context.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
     },
     stop: function() {
         clearInterval(this.interval);
-        this.context.filter = 'contrast(2)'
-        this.context.font = "50px Georgia";
-        this.context.fillText("Crash!", 250, 200);
+        // this.context.filter = 'contrast(2)'
+        // this.context.font = "50px Georgia";
+        // this.context.fillText("Crash!", 250, 200);
     }
 }
 
@@ -34,7 +35,6 @@ export default {
             myScore: null,
             duck: image,
             gameCanvas: null,
-            interval: null,
             disableBtnJump: true,
         }
     },
@@ -64,7 +64,6 @@ export default {
             this.disableBtnJump = false
             myGameArea.start(this.gameCanvas);
             myGameArea.interval = setInterval(this.updateGameArea, 20);
-            this.updateGameArea();
         },
         component(width, height, color, x, y, type) {
             this.type = type;
@@ -102,12 +101,20 @@ export default {
                 this.x += this.speedX;
                 this.y += this.speedY + this.gravitySpeed;
                 this.hitBottom();
+                this.hitTop();
             }
             this.hitBottom = function() {
                 let rockbottom = myGameArea.height - this.height;
                 if (this.y > rockbottom) {
                     this.y = rockbottom;
                     this.gravitySpeed = 0;
+                }
+            }
+            this.hitTop = function() {
+                let top = 0;
+                if (this.y < top) {
+                    this.y = top;
+                    this.gravitySpeed = -0.02;
                 }
             }
             this.crashWith = function(otherobj) {
@@ -132,7 +139,7 @@ export default {
             for (let i = 0; i < this.myObstacles.length; i += 1) {
                 if (this.myGamePiece.crashWith(this.myObstacles[i])) {
                     myGameArea.stop();
-                    this.disableBtnJump = true
+                    this.disableBtnJump = true;
                     return;
                 }
             }
@@ -165,6 +172,7 @@ export default {
         },
         jump(n) {
             this.myGamePiece.gravity = n;
+            // this.myGamePiece.gravity -= 0.02;
             // console.log(this.myGamePiece.gravity);
         }
     },
