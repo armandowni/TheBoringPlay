@@ -53,7 +53,7 @@
     }
     #gameCanvas {
         background-image: url("../../../assets/image/download.png");
-        width: 320px;
+        width: 300px;
         height: 200px;
     }
     .highScores {

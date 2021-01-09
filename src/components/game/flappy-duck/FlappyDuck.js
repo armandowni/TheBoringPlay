@@ -36,6 +36,7 @@ export default {
             duck: image,
             gameCanvas: null,
             disableBtnJump: true,
+            disableBtnStart: false,
         }
     },
     mounted() {
@@ -44,16 +45,16 @@ export default {
     },
     methods: {
         viewGame() {
-            this.myGamePiece = new this.component(50, 50, this.duck, 10, 150, 'image');
             this.myScore = new this.component("30px", "Consolas", "black", 280, 40, "text");
             this.myObstacles.push(new this.component(50, 160, "green", 500, 0));
             this.myObstacles.push(new this.component(50, 160, "green", 500, 250));
-            this.disableBtnJump = true
+            this.myGamePiece = new this.component(50, 50, this.duck, 10, 150, 'image');
 
             myGameArea.view(this.gameCanvas)
+
             this.myScore.text = "SCORE: " + myGameArea.frameNo;
-            this.myScore.update();
             this.myGamePiece.update();
+            this.myScore.update();
             this.myObstacles[0].update();
             this.myObstacles[1].update();
         },
@@ -62,6 +63,7 @@ export default {
             this.myGamePiece.gravity = 0.05;
             this.myScore = new this.component("30px", "Consolas", "black", 280, 40, "text");
             this.disableBtnJump = false
+            this.disableBtnStart = true
             myGameArea.start(this.gameCanvas);
             myGameArea.interval = setInterval(this.updateGameArea, 20);
         },
@@ -118,10 +120,10 @@ export default {
                 }
             }
             this.crashWith = function(otherobj) {
-                let myleft = this.x;
-                let myright = this.x + (this.width);
-                let mytop = this.y;
-                let mybottom = this.y + (this.height);
+                let myleft = this.x + 15;
+                let myright = this.x + (this.width) - 10;
+                let mytop = this.y + 15;
+                let mybottom = this.y + (this.height) - 10;
                 let otherleft = otherobj.x;
                 let otherright = otherobj.x + (otherobj.width);
                 let othertop = otherobj.y;
@@ -139,7 +141,11 @@ export default {
             for (let i = 0; i < this.myObstacles.length; i += 1) {
                 if (this.myGamePiece.crashWith(this.myObstacles[i])) {
                     myGameArea.stop();
+                    this.myObstacles = []
+                    this.myObstacles.push(new this.component(50, 160, "green", 500, 0));
+                    this.myObstacles.push(new this.component(50, 160, "green", 500, 250));
                     this.disableBtnJump = true;
+                    this.disableBtnStart = false;
                     return;
                 }
             }
@@ -172,8 +178,7 @@ export default {
         },
         jump(n) {
             this.myGamePiece.gravity = n;
-            // this.myGamePiece.gravity -= 0.02;
-            // console.log(this.myGamePiece.gravity);
+            // console.log("jump game");
         }
     },
 };

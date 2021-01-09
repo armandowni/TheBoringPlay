@@ -50,8 +50,13 @@
     }
     #gameCanvas {
         background-image: url("../../../assets/image/download.png");
-        width: 320px;
+        width: 300px;
         height: 200px;
+    }
+    .userBtn ul li {
+        list-style: none;
+        display: inline;
+        padding: 0px 10px;
     }
     .highScores {
         width: 300px;
