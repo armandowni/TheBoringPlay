@@ -20,16 +20,16 @@ let myGameArea = {
 }
 import image from '@/assets/image/bird1.png'
 
-// let data = [{
-//   name: "IronMen",
-//   score: 800
-// }, {
-//   name: "Odading",
-//   score: 300
-// }, {
-//   name: "Lewis",
-//   score: 200
-// }]
+let data = [{
+    name: "IronMen",
+    score: 800
+}, {
+    name: "Odading",
+    score: 300
+}, {
+    name: "Lewis",
+    score: 200
+}]
 export default {
     name: 'CanonGame',
     data() {
