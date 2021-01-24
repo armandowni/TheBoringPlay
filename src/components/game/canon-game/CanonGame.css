@@ -28,21 +28,78 @@
     margin: 0px;
 }
 
-.highScores {
-    width: 70%;
-    height: auto;
-    border: 1px solid black;
-    padding: 0px 20px;
-    margin: 0px 100px;
-    background-color: white;
-}
-
-.highScores h1 {
+#highScore h2 {
+    color: white;
     text-align: center;
 }
 
-.HighScore tr td {
-    padding: 5px 20px;
+#tableScore {
+    background-color: white;
+    margin: 0px 25%;
+    border-radius: 10px;
+}
+
+#headTable tr {
+    background-color: #007bff;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    color: white;
+    display: block;
+}
+
+#headTable td {
+    padding: 10px 30px;
+    text-align: center;
+}
+
+#bodyTable {
+    display: block;
+    height: 300px;
+    overflow: auto;
+    margin-bottom: 10px;
+    /* border-radius: 10px; */
+}
+
+#bodyTable td {
+    padding: 10px 35px;
+    text-align: center;
+}
+
+#bodyTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 20px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 20px;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    border-radius: 20px;
 }
 
 @media screen and (max-width:475.98px) {
@@ -53,7 +110,7 @@
     }
     #gameCanvas {
         background-image: url("../../../assets/image/download.png");
-        width: 300px;
+        width: 360px;
         height: 200px;
     }
     .highScores {
@@ -69,5 +126,13 @@
     }
     .userBtn ul li {
         padding-top: 10px;
+    }
+    #highScore {
+        padding: 0px 15px;
+    }
+    #tableScore {
+        background-color: white;
+        margin: 0px 40px;
+        border-radius: 10px;
     }
 }

@@ -1,3 +1,5 @@
+import axios from "axios";
+import restApi from "../../../router/restAPI"
 // gameArea
 let myGameArea = {
     // canvas: document.getElementById('gameCanvas'),
@@ -20,16 +22,6 @@ let myGameArea = {
 }
 import image from '@/assets/image/bird1.png'
 
-let data = [{
-    name: "IronMen",
-    score: 800
-}, {
-    name: "Odading",
-    score: 300
-}, {
-    name: "Lewis",
-    score: 200
-}]
 export default {
     name: 'CanonGame',
     data() {
@@ -39,6 +31,7 @@ export default {
             time: null,
             myScore: null,
             timer: null,
+            allScore: [],
 
             // gameCanvas
             gameCanvas: null,
@@ -75,7 +68,7 @@ export default {
             myGameArea.view(this.gameCanvas)
             this.angle.value = 0
             this.disabledBtn()
-                // this.viewDataPlayer();
+            this.viewDataPlayer();
             this.utility();
             this.updateGameArea();
             this.clock();
@@ -94,8 +87,7 @@ export default {
                 this.timer = setInterval(function() {
                     x.printClock(myGameArea.waktu);
                     if (myGameArea.waktu == -1) {
-                        // let nama = prompt("Enter your name: ")
-                        // x.addDataPlayer(nama, x.score)
+                        x.addDataPlayer(x.score)
                         x.score = 0
                         x.berhenti = true
                         x.tembak = false
@@ -124,56 +116,30 @@ export default {
 
         // view and add data player
         viewDataPlayer() {
-            let tableHs = ""
-            tableHs = document.getElementById('highScore')
+            axios.get(restApi.globalStorage + "/api/highscorecanons/getAllData").then((data) => {
                 // console.log(data);
-            for (let index = 0; index < data.length; index++) {
-                var row = tableHs.insertRow(index + 1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = index + 1 + ".";
-                cell2.innerHTML = data[index].name;
-                cell3.innerHTML = data[index].score;
-            }
-            // console.log(tableHs.rows.length);
-
-            if (this.change == true) {
-                for (let index = tableHs.rows.length; index > data.length + 1; index--) {
-                    tableHs.deleteRow(index - 1);
-                }
-            }
-            // console.log(tableHs.rows.length);
-            this.change = false
+                this.allScore = data.data
+            })
         },
-        addDataPlayer(name, score) {
+        addDataPlayer(score) {
+            let nama = prompt("Enter your name: ")
+
             let addData = {
-                name: name,
+                username: nama,
                 score: score
             };
 
-            let indexKe = 0
-                // cekscore
-            for (let index = 0; index < data.length; index++) {
-                if (data[index].score > addData.score) {
-                    if (data[index].score < addData.score) {
-                        indexKe = index + 1
-                    } else {
-                        indexKe = index + 1
-                    }
-                } else if (data[index].score == addData.score) {
-                    indexKe = index
+            axios.post(restApi.globalStorage + "/api/highscorecanons/addDataPlayer", addData).then(result => {
+                let results = result.statusText
+                if (results === "OK") {
+                    alert(result.data.Data);
+                    this.viewGame();
+                } else {
+                    alert("Can't save data, please wait or refresh the page");
+                    this.viewGame();
                 }
-            }
 
-            // console.log(indexKe);
-            data.splice(indexKe, 0, addData);
-
-            if (data.length > 10) {
-                data.splice(data.length - 1, 1)
-            }
-
-            alert("Successfull add data \nName : " + name + "\nScore: " + score);
+            });
             this.change = true
         },
         // end view and add data player

@@ -19,17 +19,24 @@
                             <h4 class="alert" id="alert" style="color: red;"></h4>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <!-- <div class="highScores">
-                            <h1>Top 10 High Scores</h1>
-                            <table class="HighScore" id="highScore">
+                    <div class="col-sm-6" id="highScore">
+                        <h2>High Score Top 50</h2>
+                        <table id="tableScore">
+                            <thead id="headTable">
                                 <tr>
                                     <td>No.</td>
                                     <td>Name</td>
                                     <td>Score</td>
                                 </tr>
-                            </table>
-                        </div> -->
+                            </thead>
+                            <tbody id="bodyTable">
+                                <tr v-for="(score,index) in allScore.Data">
+                                    <td>{{index+1}}</td>
+                                    <td>{{score.username}}</td>
+                                    <td>{{score.score}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

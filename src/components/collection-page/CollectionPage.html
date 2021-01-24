@@ -1,44 +1,12 @@
 <div class="collectionPage">
-    <div class="container gameContainer">
+    <div class="container gameContainer " v-if="!loadPage">
         <ul class="list-group list-group-horizontal-sm gameList">
-            <li class="list-group-item">
-                <img src="../../assets/image/canon-1600616-1356945.png" alt="Tidak memuat" width="60" height="60">
+            <li class="list-group-item" v-for="(menulist) in menu.Data">
+                <!-- <img alt="Tidak memuat" width="60" height="60"> -->
                 <br>
-                <a href="/canonGame">
+                <a v-bind:href="menulist.gameUrl">
                     <button class="btn btn-danger" type="button">
-                        Canon game
-                    </button>
-                </a>
-            </li>
-            <li class="list-group-item"><img src="../../assets/image/flappy_duck-removebg.png" alt="Tidak memuat" width="60" height="60">
-                <br>
-                <a href="/flappyduck">
-                    <button class="btn btn-danger" type="button">
-                        Flappy Duck game
-                    </button>
-                </a>
-            </li>
-            <li class="list-group-item"><img src="../../assets/image/325-3254134_in-tribute-to-rivka-begun-coming-soon-icon-png.png" alt="Tidak memuat" width="60" height="60">
-                <br>
-                <a href="#">
-                    <button class="btn btn-danger" type="button">
-                        Coming Soon
-                    </button>
-                </a>
-            </li>
-            <li class="list-group-item"><img src="../../assets/image/325-3254134_in-tribute-to-rivka-begun-coming-soon-icon-png.png" alt="Tidak memuat" width="60" height="60">
-                <br>
-                <a href="#">
-                    <button class="btn btn-danger" type="button">
-                        Coming Soon
-                    </button>
-                </a>
-            </li>
-            <li class="list-group-item"><img src="../../assets/image/325-3254134_in-tribute-to-rivka-begun-coming-soon-icon-png.png" alt="Tidak memuat" width="60" height="60">
-                <br>
-                <a href="#">
-                    <button class="btn btn-danger" type="button">
-                        Coming Soon
+                        {{menulist.gameName}}
                     </button>
                 </a>
             </li>
@@ -63,5 +31,11 @@
                 </li>
             </ul>
         </nav>
+    </div>
+    <div class="container" v-if="loadPage">
+        <div class="yellow"></div>
+        <div class="red"></div>
+        <div class="blue"></div>
+        <div class="violet"></div>
     </div>
 </div>

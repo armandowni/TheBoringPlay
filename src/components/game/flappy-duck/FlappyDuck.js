@@ -1,3 +1,5 @@
+import axios from "axios";
+import restApi from "../../../router/restAPI"
 let myGameArea = {
     start: function(gameCanvas) {
         this.width = gameCanvas.width = 640;
@@ -37,6 +39,7 @@ export default {
             gameCanvas: null,
             disableBtnJump: true,
             disableBtnStart: false,
+            allScore: [],
         }
     },
     mounted() {
@@ -57,6 +60,7 @@ export default {
             this.myScore.update();
             this.myObstacles[0].update();
             this.myObstacles[1].update();
+            this.viewDataPlayer()
         },
         startGame() {
             this.myGamePiece = new this.component(50, 50, this.duck, 10, 150, 'image');
@@ -140,6 +144,7 @@ export default {
             let x, height, gap, minHeight, maxHeight, minGap, maxGap;
             for (let i = 0; i < this.myObstacles.length; i += 1) {
                 if (this.myGamePiece.crashWith(this.myObstacles[i])) {
+                    this.addDataPlayer(myGameArea.frameNo)
                     myGameArea.stop();
                     this.myObstacles = []
                     this.myObstacles.push(new this.component(50, 160, "green", 500, 0));
@@ -179,6 +184,35 @@ export default {
         jump(n) {
             this.myGamePiece.gravity = n;
             // console.log("jump game");
-        }
+        },
+        // view and add data player
+        viewDataPlayer() {
+            axios.get(restApi.globalStorage + "/api/highscoreflappyducks/getAllData").then((data) => {
+                // console.log(data);
+                this.allScore = data.data
+            })
+        },
+        addDataPlayer(score) {
+            let nama = prompt("Enter your name: ")
+
+            let addData = {
+                username: nama,
+                score: score
+            };
+            console.log(addData);
+            axios.post(restApi.globalStorage + "/api/highscoreflappyducks/addDataPlayer", addData).then(result => {
+                let results = result.statusText
+                if (results === "OK") {
+                    alert(result.data.Data);
+                    this.viewGame();
+                } else {
+                    alert("Can't save data, please wait or refresh the page");
+                    this.viewGame();
+                }
+
+            });
+            // this.change = true
+        },
+        // end view and add data player
     },
 };
