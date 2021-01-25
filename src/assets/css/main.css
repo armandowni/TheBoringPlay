@@ -26,7 +26,8 @@
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
-* {
+
+/* * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
@@ -36,12 +37,13 @@ body,
 html {
     height: 100%;
     font-family: Poppins-Regular, sans-serif;
-}
+} */
 
 
 /*---------------------------------------------*/
 
-a {
+
+/* a {
     font-family: Poppins-Regular;
     font-size: 14px;
     line-height: 1.7;
@@ -51,7 +53,7 @@ a {
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
-}
+} */
 
 a:focus {
     outline: none !important;
@@ -73,13 +75,14 @@ h6 {
     margin: 0px;
 }
 
-p {
+
+/* p {
     font-family: Poppins-Regular;
     font-size: 14px;
     line-height: 1.7;
     color: #666666;
     margin: 0px;
-}
+} */
 
 ul,
 li {
@@ -254,7 +257,7 @@ iframe {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    padding: 64px 15px 64px 15px;
+    padding: 20px 15px 20px 15px;
 }
 
 .contact100-form-title-1 {
@@ -318,7 +321,7 @@ iframe {
     font-size: 15px;
     color: #808080;
     line-height: 1.2;
-    text-align: right;
+    text-align: left;
     position: absolute;
     top: 14px;
     left: -105px;
