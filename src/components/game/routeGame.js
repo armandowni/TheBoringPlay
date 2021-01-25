@@ -2,12 +2,12 @@ import CanonGame from './canon-game/CanonGame.vue'
 import FlappyDuck from './flappy-duck/FlappyDuck.vue'
 
 const routeGame = [{
-        path: '/canonGame',
+        path: '/gameList/canonGame',
         name: 'Canon Game',
         component: CanonGame
     },
     {
-        path: '/flappyduck',
+        path: '/gameList/flappyduck',
         name: 'Flappy Duck',
         component: FlappyDuck
     },

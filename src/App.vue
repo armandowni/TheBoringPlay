@@ -26,7 +26,7 @@
               <a class="nav-link" href="/collection">Game Collection</a>
             </li>
             <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Feedback</a>
+              <a class="nav-link" href="/feedback">Feedback</a>
             </li> -->
           </ul>
           <!-- <form class="form-inline my-2 my-lg-0">

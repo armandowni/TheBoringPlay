@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/home/Home.vue'
 import collectionPage from '../components/collection-page/CollectionPage.vue';
+import feedback from '../components/Feedback/Feedback.vue';
 import routeGame from '../components/game/routeGame';
 
 Vue.use(VueRouter)
@@ -20,7 +21,13 @@ const routes = [{
         path: '/collection',
         name: 'Collection',
         component: collectionPage
-    }
+    },
+    {
+        path: '/feedback',
+        name: 'Feedback',
+        component: feedback
+    },
+
 ]
 
 routeGame.forEach((data) => {
