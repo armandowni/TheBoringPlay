@@ -93,7 +93,8 @@ li {
 
 /*---------------------------------------------*/
 
-input {
+
+/* input {
     outline: none;
     border: none;
 }
@@ -107,33 +108,34 @@ input[type="number"] {
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
-}
+} */
 
 textarea {
     outline: none;
     border: none;
 }
 
-textarea:focus,
-input:focus {
+textarea:focus {
     border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder {
+
+/* input:focus::-webkit-input-placeholder {
     color: transparent;
 }
 
 input:focus:-moz-placeholder {
     color: transparent;
-}
+} */
 
-input:focus::-moz-placeholder {
+
+/* input:focus::-moz-placeholder {
     color: transparent;
 }
 
 input:focus:-ms-input-placeholder {
     color: transparent;
-}
+} */
 
 textarea:focus::-webkit-input-placeholder {
     color: transparent;
@@ -151,21 +153,23 @@ textarea:focus:-ms-input-placeholder {
     color: transparent;
 }
 
-input::-webkit-input-placeholder {
+
+/* input::-webkit-input-placeholder {
     color: #999999;
 }
 
 input:-moz-placeholder {
     color: #999999;
-}
+} */
 
-input::-moz-placeholder {
+
+/* input::-moz-placeholder {
     color: #999999;
 }
 
 input:-ms-input-placeholder {
     color: #999999;
-}
+} */
 
 textarea::-webkit-input-placeholder {
     color: #999999;

@@ -78,6 +78,7 @@ export default {
             myGameArea.start(this.gameCanvas);
             this.clock();
             this.enableBtn();
+            this.addGamePlayed()
         },
 
         // clock function
@@ -115,6 +116,11 @@ export default {
         // end clock
 
         // view and add data player
+        addGamePlayed() {
+            let param = this.$router.currentRoute.name
+            let dataName = "Name=" + param
+            axios.post(restApi.globalStorage + "/api/gamelists/addGamePLayed", dataName)
+        },
         viewDataPlayer() {
             axios.get(restApi.globalStorage + "/api/highscorecanons/getAllData").then((data) => {
                 // console.log(data);
@@ -122,24 +128,28 @@ export default {
             })
         },
         addDataPlayer(score) {
-            let nama = prompt("Enter your name: ")
+            if (confirm('Are you sure you want to save your highscore?')) {
+                let nama = prompt("Enter your name: ")
 
-            let addData = {
-                username: nama,
-                score: score
-            };
+                let addData = {
+                    username: nama,
+                    score: score
+                };
 
-            axios.post(restApi.globalStorage + "/api/highscorecanons/addDataPlayer", addData).then(result => {
-                let results = result.statusText
-                if (results === "OK") {
-                    alert(result.data.Data);
-                    this.viewGame();
-                } else {
-                    alert("Can't save data, please wait or refresh the page");
-                    this.viewGame();
-                }
+                axios.post(restApi.globalStorage + "/api/highscorecanons/addDataPlayer", addData).then(result => {
+                    let results = result.statusText
+                    if (results === "OK") {
+                        alert(result.data.Data);
+                        this.viewGame();
+                    } else {
+                        alert("Can't save data, please wait or refresh the page");
+                        this.viewGame();
+                    }
 
-            });
+                });
+            } else {
+                alert('okay no problemo');
+            }
             this.change = true
         },
         // end view and add data player

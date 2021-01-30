@@ -70,6 +70,7 @@ export default {
             this.disableBtnStart = true
             myGameArea.start(this.gameCanvas);
             myGameArea.interval = setInterval(this.updateGameArea, 20);
+            this.addGamePlayed()
         },
         component(width, height, color, x, y, type) {
             this.type = type;
@@ -186,6 +187,11 @@ export default {
             // console.log("jump game");
         },
         // view and add data player
+        addGamePlayed() {
+            let param = this.$router.currentRoute.name
+            let dataName = "Name=" + param
+            axios.post(restApi.globalStorage + "/api/gamelists/addGamePLayed", dataName)
+        },
         viewDataPlayer() {
             axios.get(restApi.globalStorage + "/api/highscoreflappyducks/getAllData").then((data) => {
                 // console.log(data);
@@ -193,24 +199,29 @@ export default {
             })
         },
         addDataPlayer(score) {
-            let nama = prompt("Enter your name: ")
+            if (confirm('Are you sure you want to save your highscore?')) {
+                let nama = prompt("Enter your name: ")
+                let addData = {
+                    username: nama,
+                    score: score
+                };
+                // console.log(addData);
+                axios.post(restApi.globalStorage + "/api/highscoreflappyducks/addDataPlayer", addData).then(result => {
+                    let results = result.statusText
+                    if (results === "OK") {
+                        alert(result.data.Data);
+                        this.viewGame();
+                    } else {
+                        alert("Can't save data, please wait or refresh the page");
+                        this.viewGame();
+                    }
 
-            let addData = {
-                username: nama,
-                score: score
-            };
-            console.log(addData);
-            axios.post(restApi.globalStorage + "/api/highscoreflappyducks/addDataPlayer", addData).then(result => {
-                let results = result.statusText
-                if (results === "OK") {
-                    alert(result.data.Data);
-                    this.viewGame();
-                } else {
-                    alert("Can't save data, please wait or refresh the page");
-                    this.viewGame();
-                }
+                });
+            } else {
+                alert('okay no problemo');
+            }
 
-            });
+
             // this.change = true
         },
         // end view and add data player
