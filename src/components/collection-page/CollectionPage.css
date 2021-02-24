@@ -8,42 +8,12 @@
     margin: 20px 0px;
 }
 
-.gameList li {
-    margin: 0px 10px;
-}
-
-.gameList li img {
-    margin-bottom: 10px;
-}
-
-.gameList li a {
-    color: white;
-}
-
-.pagination {
-    margin: 10px 10px;
+.btnPlay {
+    margin-top: 130px;
 }
 
 #loader {
     position: fixed;
     top: 45%;
     left: 45%;
-}
-
-@media screen and (max-width: 425.98px) {
-    .gameContainer {
-        margin: 50px 0px;
-    }
-    .gameList li {
-        margin: 10px 10px;
-    }
-    .pagination {
-        margin: 10px 10px;
-    }
-}
-
-@media screen and (min-width: 500.98px) {
-    .gameContainer {
-        margin: 100px 0px;
-    }
 }

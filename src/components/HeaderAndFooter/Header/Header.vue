@@ -19,11 +19,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link white--text" href="/home">Home </a>
+            <a class="nav-link white--text" href="/home" >{{t('HomeMenu')}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link white--text" href="/collection"
-              >Game Collection</a
+              >{{t('CollectionMenu')}}</a
             >
           </li>
         </ul>
@@ -34,15 +34,15 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="white" v-bind="attrs" v-on="on">
-              <country-flag :country="lang.icon" />
+              <country-flag :country="lang.icon" style="border:1px solid black;"/>
               <span style="padding-left:10px;">{{ lang.title }}</span>
             </v-btn>
           </template>
-          <v-list color="primary" dark>
+          <v-list >
             <v-list-item v-for="(item, index) in items" :key="index">
               <v-list-item-title>
                 <a @click="changeLang(item)">
-                  <country-flag :country="item.icon"/>
+                  <country-flag :country="item.icon" style="border:1px solid black;"/>
                   <span style="padding-left:10px;">{{ item.title }}</span>
                 </a>
               </v-list-item-title>

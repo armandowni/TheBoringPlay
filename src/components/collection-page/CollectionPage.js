@@ -1,11 +1,13 @@
 import axios from "axios";
 import restApi from "../../router/restAPI"
+
 export default {
     name: 'CollectionPage',
     data() {
         return {
             menu: [],
             loadPage: true,
+            page: 1,
         }
     },
     beforeMount() {

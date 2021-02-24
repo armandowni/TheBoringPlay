@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row" id="contain">
                 <div class="col-sm-6" id="right">
-                    <h1 class="white--text">GET BORED? JUST PLAY IT</h1>
-                    <p class="white--text">This application provides old games that can keep you entertained from boredom or add to your boredom</p>
+                    <h1 class="white--text">{{t('HomeTitle')}}</h1>
+                    <p class="white--text">{{t('HomeDesc')}}</p>
                     <a href="/collection">
                         <v-btn rounded color="white" style="color: black;">
-                            Collection
+                            {{t('BtnCollection')}}
                             <v-icon style="margin-left: 10px;">fas fa-arrow-right</v-icon>
                         </v-btn>
                     </a>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="aboutSection">
-        <h1>About App</h1>
+        <h1>{{t('AboutUsTitle')}}</h1>
         <div class="row" id="aboutSection">
             <div class="col">
                 <v-item-group active-class="primary">
