@@ -1,123 +1,62 @@
-#judul h1 {
-    padding: 100px 35px;
-    color: white;
-    font-size: 55pt;
-    text-align: left;
+#home {
+    padding-bottom: 50px;
 }
 
-ul li {
-    list-style: none;
-    display: inline-block;
-    padding: 50px 20px;
+#landingSection {
+    padding: 10px 0px;
+    background-color: #0abcf9;
+    background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
 }
 
-.profile-card-2 {
-    max-width: 200px;
-    background-color: #FFF;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-    background-position: center;
-    overflow: hidden;
-    position: relative;
-    /* margin: 10px auto; */
-    cursor: pointer;
-    border-radius: 10px;
+#contain {
+    padding: 60px 0px;
 }
 
-.profile-card-2 img {
-    transition: all linear 0.25s;
+#right {
+    padding: 100px 50px;
 }
 
-.profile-card-2 .profile-name {
-    position: absolute;
-    left: 30px;
-    bottom: 70px;
-    font-size: 30px;
-    color: #FFF;
-    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    transition: all linear 0.25s;
+#right h1 {
+    color: linear-gradient(to bottom right, #fb6704 0%, #bd9170 100%);
+    font-weight: 1000;
 }
 
-.profile-card-2 .profile-icons {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    color: #FFF;
-    transition: all linear 0.25s;
+#right p {
+    width: 50%;
 }
 
-.profile-card-2 .profile-username {
-    position: absolute;
-    bottom: 50px;
-    left: 30px;
-    color: #FFF;
-    font-size: 13px;
-    transition: all linear 0.25s;
+.aboutSection {
+    margin: 20px;
+    margin-bottom: 50px;
 }
 
-.profile-card-2 .profile-icons .fa {
-    margin: 5px;
-}
-
-.profile-card-2:hover img {
-    filter: grayscale(100%);
-}
-
-.profile-card-2:hover .profile-name {
-    bottom: 80px;
-}
-
-.profile-card-2:hover .profile-username {
-    bottom: 60px;
-}
-
-.profile-card-2:hover .profile-icons {
-    right: 40px;
-}
-
-
-/* cell number */
-
-.gallery-cell:before {
-    display: block;
+.aboutSection h1 {
     text-align: center;
-    content: counter(gallery-cell);
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
+    font-weight: 500;
 }
 
-@media screen and (max-width:475.98px) {
-    #judul h1 {
-        padding: 50px 40px;
-        color: white;
-        font-size: 40pt;
-        text-align: center;
-    }
-    ul {
-        padding: 0px 10px;
-    }
-    ul li {
-        list-style: none;
-        display: inline-block;
-        padding: 10px 0px;
-        text-align: center;
-    }
-    .profile-card-2 {
-        max-width: 200px;
-        height: 200px;
-        background-color: #FFF;
-        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
-        background-position: center;
-        overflow: hidden;
-        position: relative;
-        /* margin: 10px auto; */
-        cursor: pointer;
-        border-radius: 10px;
-    }
-    .profile-card-2 img {
-        transition: all linear 0.25s;
-        width: 200px;
-        height: 200px;
-    }
+#aboutSection {
+    width: 100%;
+    height: 100%;
+    margin: 20px 0px;
+}
+
+.v-item-group {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.iconAbout {
+    width: 100%;
+    height: 100%;
+    padding: 20% 40%;
+    background-color: #63a4ff;
+    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+}
+
+.text {
+    font-size: 12pt;
+    padding: 10px auto;
+    text-align: center;
+    font-style: Bold;
 }

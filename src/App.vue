@@ -1,64 +1,83 @@
 <template>
-  <div id="app">
-    <div class="header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="/">The Boring Game</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/home"
-                >Home <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/collection">Game Collection</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="/feedback">Feedback</a>
-            </li> -->
-          </ul>
-          <!-- <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-light my-2 my-sm-0" type="submit">Search</button>
-                </form> -->
-        </div>
-      </nav>
+  <v-app transition="fade-transition">
+    <div v-if="load">
+      <div v-if="page === 'Home' || page === 'LandingPage'">
+        <v-app id="inspire" transition="fade-transition">
+          <router-view :breakpointSize="breakpointSize"></router-view>
+        </v-app>
+      </div>
+      <div v-else>
+        <v-app id="inspire" transition="fade-transition">
+          <header-component class="anotherHeader" />
+          <router-view></router-view>
+        </v-app>
+      </div>
     </div>
-    <router-view></router-view>
-  </div>
+
+    <div class="text-center" id="loader" v-if="!load">
+      <v-progress-circular
+        :size="100"
+        :width="10"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </div>
+  </v-app>
 </template>
 
 
 
 <script>
-// import HelloWorld from './component/HelloWorld.vue'
-
+import HeaderComponent from "./components/HeaderAndFooter/Header/Header.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    HeaderComponent,
+  },
+  data() {
+    return {
+      load: false,
+      page: "",
+      breakpointSize:0,
+    };
+  },
+  beforeMount() {
+    this.load = false;
+  },
+  mounted() {
+    this.doLoading();
+    this.checkRouteName();
+    this.checkDisplays()
+  },
+  methods: {
+    checkDisplays(){
+      this.breakpointSize = this.$vuetify.breakpoint.width
+    },
+    checkRouteName() {
+      this.page = this.$route.name;
+    },
+    doLoading() {
+      this.load = false;
+      setTimeout(() => {
+        this.load = true;
+      }, 2000);
+    },
+  },
 };
 </script>
 
 <style>
-body {
-  background-image: url("../src/assets/360_F_323880864_TPsH5ropjEBo1ViILJmcFHJqsBzorxUB.jpg");
+.anotherHeader {
+  background-color: #0abcf9;
+  background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
 }
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  /* -moz-osx-font-smoothing: grayscale; */
-  text-align: center;
+#loader {
+  position: fixed;
+  top: 45%;
+  left: 45%;
+}
+.v-application--wrap {
+  min-height: 0vh;
+  max-height: 0%;
 }
 </style>

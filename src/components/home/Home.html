@@ -1,35 +1,64 @@
-<div class="home">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-4" id="judul">
-                <h1>Make the game even more boring</h1>
-            </div>
-            <div class="col-sm-8" id="carouselGame">
-                <ul>
-                    <li>
-                        <a href="/gameList/canonGame">
-                            <div class="profile-card-2"><img src="../../assets/image/canongame.png" class="img img-responsive">
-                                <div class="profile-name">Canon game</div>
-                                <!-- <div class="profile-username">@johndoesurname</div> -->
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/gameList/flappyduck">
-                            <div class="profile-card-2"><img src="../../assets/image/flappyduck.png" class="img img-responsive">
-                                <div class="profile-name">Flappy Duck</div>
-                            </div>
-                        </a>
-                    </li>
-                    <!-- <li>
-                        <div class="profile-card-2"><img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-2.jpg" class="img img-responsive">
-                            <div class="profile-name">JOHN DOE</div>
-                        </div>
-                    </li> -->
-                </ul>
-
+<div id="home">
+    <!-- <div > -->
+    <div id="landingSection">
+        <HeaderComponent />
+        <div class="container-fluid">
+            <div class="row" id="contain">
+                <div class="col-sm-6" id="right">
+                    <h1 class="white--text">GET BORED? JUST PLAY IT</h1>
+                    <p class="white--text">This application provides old games that can keep you entertained from boredom or add to your boredom</p>
+                    <a href="/collection">
+                        <v-btn rounded color="white" style="color: black;">
+                            Collection
+                            <v-icon style="margin-left: 10px;">fas fa-arrow-right</v-icon>
+                        </v-btn>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <img src="../../assets/landing_page.png" alt="">
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="aboutSection">
+        <h1>About App</h1>
+        <div class="row" id="aboutSection">
+            <div class="col">
+                <v-item-group active-class="primary">
+                    <v-row class="justify-space-between">
+                        <v-col v-for="n in 3" :key="n"  md="3">
+                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 1">
+                                <div class="iconAbout">
+                                    <v-icon x-large>fas fa-gamepad</v-icon>
+                                </div>
+                                <v-card-text class="justify-lg-center text font-weight-bold">
+                                    This application is made for people who are feeling bored. This application has a simple game that everyone can play. Some games have a highscore and some don't. This application can be played anywhere.
+                                </v-card-text>
+                            </v-card>
+                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 2">
+                                <div class="iconAbout">
+                                    <v-icon x-large>fas fa-laptop-code</v-icon>
+                                </div>
+                                <v-card-text class="justify-lg-center text font-weight-bold">
+                                    This application is based on javascript which makes it easy for developers to make games. Developers can also publish the game for free, Because we have a tag line "JUST MAKE IT". Open for anyone and everywhere.
+                                </v-card-text>
+                            </v-card>
+                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 3">
+                                <div class="iconAbout">
+                                    <v-icon x-large>fas fa-users</v-icon>
+                                </div>
+                                <v-card-text class="justify-lg-center text font-weight-bold">
+                                    This application was created in 2020 which aims to help developers hone skills in coding. This application was built in collaboration with developers who are currently building careers in the IT world.
+                                </v-card-text>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-item-group>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- </div> -->
 </div>
