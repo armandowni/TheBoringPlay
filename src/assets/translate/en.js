@@ -11,5 +11,7 @@ export default Vue.locales({
         'BtnCollection': 'Collection',
         'AboutUsTitle': 'About Us',
         'ComingSoon': 'Coming Soon',
+        'startBtn': 'Start Game',
+        'jumpBtn': 'Jump',
     }
 });

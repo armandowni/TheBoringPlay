@@ -11,5 +11,8 @@ export default Vue.locales({
         'BtnCollection': 'Koleksi',
         'AboutUsTitle': 'Tentang Kami',
         'ComingSoon': 'Akan Datang',
+        'startBtn': 'Mulai Permainan',
+        'fireBtn': 'Tembak',
+        'jumpBtn': 'lompat',
     }
 });

@@ -12,6 +12,7 @@ let myGameArea = {
         gameCanvas.width = 640;
         gameCanvas.height = 400;
         this.context = gameCanvas.getContext("2d");
+        this.context.filter = "grayscale(50)"
         this.frameNo = 0;
         this.interval = null;
     },
@@ -40,6 +41,10 @@ export default {
             disableBtnJump: true,
             disableBtnStart: false,
             allScore: [],
+            items: [
+                'Highscore Top 50',
+            ],
+            tab: null,
         }
     },
     mounted() {

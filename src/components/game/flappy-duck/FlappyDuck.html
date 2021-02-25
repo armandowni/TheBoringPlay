@@ -1,46 +1,52 @@
-<div id="flappyDuck">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 id="title">Flappy Game</h1>
+<div class="container" id="flappyDuck">
+    <h1 class="titleCollection">Flappy Game</h1>
+    <div class="row">
+        <div class="col-sm-8">
+            <div id="gamePlay">
+                <canvas id="gameCanvas"></canvas>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div id="gamePlay">
-                            <canvas id="gameCanvas"></canvas>
-                        </div>
-                        <div class="userBtn">
-                            <ul>
-                                <li>
-                                    <input type="button" id="startBtn" v-on:mousedown="jump(-0.2)" v-on:mouseup="jump(0.05)" v-on:touchend="jump(0.05)" v-on:touchstart="jump(-0.2)" :disabled="disableBtnJump" value="Jump">
-                                </li>
-                                <li><input type="button" id="startBtn" value="Start Game" v-on:click="startGame()" :disabled="disableBtnStart"></li>
-                            </ul>
-                            <h4 class="alert" id="alert" style="color: red;"></h4>
-                        </div>
-                    </div>
-                    <div class="col-sm-6" id="highScore">
-                        <h2>High Score Top 50</h2>
-                        <table id="tableScore">
-                            <thead id="headTable">
-                                <tr>
-                                    <td>No.</td>
-                                    <td>Name</td>
-                                    <td>Score</td>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyTable">
-                                <tr v-for="(score,index) in allScore.Data">
-                                    <td>{{index+1}}</td>
-                                    <td>{{score.username}}</td>
-                                    <td>{{score.score}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="userBtn">
+                <v-row>
+                    <v-col cols="12" sm="6" md="3">
+                        <v-btn elevation="4" rounded color="primary" id="startBtn" v-on:mousedown="jump(-0.2)" v-on:mouseup="jump(0.05)" v-on:touchend="jump(0.05)" v-on:touchstart="jump(-0.2)">{{t('jumpBtn')}}</v-btn>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                        <v-btn elevation="4" rounded color="primary" id="startBtn" value="Start Game" v-on:click="startGame()">{{t('startBtn')}}</v-btn>
+                    </v-col>
+                </v-row>
+
             </div>
+        </div>
+        <div class="col-sm-4 " id="highScore">
+            <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+                <v-tab v-for="item in items" :key="item">
+                    {{ item }}
+                </v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="tab">
+                <v-tab-item v-for="item in items" :key="item">
+                    <v-card>
+                        <v-card-text>
+                            <table id="tableScore">
+                                <thead id="headTable">
+                                    <tr>
+                                        <td>No.</td>
+                                        <td>Name</td>
+                                        <td>Score</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyTable">
+                                    <tr v-for="(score,index) in allScore.Data">
+                                        <td>{{index+1}}</td>
+                                        <td>{{score.username}}</td>
+                                        <td>{{score.score}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </v-card-text>
+                    </v-card>
+                </v-tab-item>
+            </v-tabs-items>
         </div>
     </div>
 </div>

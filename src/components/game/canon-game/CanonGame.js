@@ -2,17 +2,18 @@ import axios from "axios";
 import restApi from "../../../router/restAPI"
 // gameArea
 let myGameArea = {
-    // canvas: document.getElementById('gameCanvas'),
     start: function(gameCanvas) {
         gameCanvas.width = 640;
         gameCanvas.height = 400;
         this.context = gameCanvas.getContext("2d");
+        this.context.filter = "grayscale(0)"
         this.waktu = 60;
     },
     view: function(gameCanvas) {
         gameCanvas.width = 640;
         gameCanvas.height = 400;
         this.context = gameCanvas.getContext("2d");
+        this.context.filter = "grayscale(50)"
         this.waktu = 60;
     },
     clear: function(gameCanvas) {
@@ -44,34 +45,40 @@ export default {
 
             // another var
             angle: null,
+            valueAngle: 0,
             buttonFire: null,
-            startBtn: null,
+            // startBtn: null,
             score: 0,
             bird: image,
+            rule: '',
 
             // character
             cannon: null,
             target: null,
-            bullet: null
+            bullet: null,
+
+            tab: null,
+            items: [
+                'Highscore Top 50',
+            ],
         }
     },
     mounted() {
         this.gameCanvas = document.getElementById("gameCanvas");
         this.buttonFire = document.getElementById('fireBtn')
-        this.startBtn = document.getElementById('startBtn')
         this.angle = document.getElementById('inputDeg')
-
+            // this.startBtn = new this.componentScore(this.gameCanvas, 50, 50, "green", 250, 200, "btnText");
         this.viewGame();
     },
     methods: {
         viewGame() {
             myGameArea.view(this.gameCanvas)
-            this.angle.value = 0
-            this.disabledBtn()
+            this.disabledBtn();
             this.viewDataPlayer();
             this.utility();
             this.updateGameArea();
             this.clock();
+            // this.startbtn();
         },
         startGame() {
             this.berhenti = false
@@ -90,6 +97,7 @@ export default {
                     if (myGameArea.waktu == -1) {
                         x.addDataPlayer(x.score)
                         x.score = 0
+                        x.valueAngle = 0
                         x.berhenti = true
                         x.tembak = false
                         x.buttonFire.disabled = false
@@ -108,7 +116,6 @@ export default {
 
         },
         printClock(second) {
-
             this.updateGameArea();
             this.time.text = "Time: " + second
             this.time.update()
@@ -167,7 +174,7 @@ export default {
             let x = Math.floor(Math.random() * 200) + 200;
             let y = Math.floor(Math.random() * 200) + 100;
             this.target = new this.componentScore(this.gameCanvas, 50, 50, this.bird, x, y, "image");
-            this.bullet = new this.componentBullet(this.gameCanvas, 10, 10, "white", this.cannon.meriam.x, this.cannon.meriam.y)
+            this.bullet = new this.componentBullet(this.gameCanvas, 10, 10, "black", this.cannon.meriam.x, this.cannon.meriam.y)
         },
 
         // component
@@ -205,8 +212,8 @@ export default {
             this.speedY = 0;
             this.x = x;
             this.y = y;
+            let ctx = Canvas.getContext("2d");
             this.update = function() {
-                let ctx = Canvas.getContext("2d");
                 if (this.type == "text") {
                     ctx.font = this.width + " " + this.height;
                     ctx.fillStyle = color;
@@ -216,6 +223,12 @@ export default {
                         this.x,
                         this.y,
                         this.width, this.height);
+                } else if (type == "btnText") {
+                    ctx.font = this.width + " " + this.height;
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(247, 180, 115, 30);
+                    ctx.fillStyle = "white";
+                    ctx.fillText(this.text, this.x, this.y);
                 } else {
                     ctx.fillStyle = color;
                     ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -224,6 +237,9 @@ export default {
             this.newPos = function() {
                 this.x += this.speedX;
                 this.y += this.speedY;
+            }
+            this.clr = function() {
+                ctx.clearRect(247, 180, 115, 30);
             }
         },
         componentCanon(gameCanvas, width, height, color, x, y) { // function for draw rect,circle,and many more
@@ -290,11 +306,11 @@ export default {
         // for button
         enableBtn() {
             this.buttonFire.disabled = false
-            this.startBtn.disabled = true
+                // this.startBtn.disabled = true
             this.angle.disabled = false
         },
         disabledBtn() {
-            this.startBtn.disabled = false
+            // this.startBtn.disabled = false
             this.buttonFire.disabled = true
             this.angle.disabled = true
         },
@@ -316,6 +332,7 @@ export default {
 
             // // peluru
             this.printPeluru();
+
         },
         // endUpdateArea
 
@@ -325,20 +342,26 @@ export default {
             this.myScore.update();
         },
 
+        // print start button
+        startbtn() {
+            this.startBtn.text = "Start Game"
+            this.startBtn.update()
+            this.startBtn.clr()
+        },
         // cannon function
         printCannonChar() {
             this.cannon.ban.update();
             this.cannon.tiang.update();
             this.cannon.meriam.update();
         },
-        updateCanon() {
-            let degree = this.angle.value
+        updateCanon(valueAngle) {
+            let degree = valueAngle
             if (degree > 90) {
-                document.getElementById('alert').innerHTML = "You cannon input greater than 90 degree "
+                this.rule = "You cannon input greater than 90 degree "
             } else if (degree < 0) {
-                document.getElementById('alert').innerHTML = "You should input greater than 0 degree "
+                this.rule = "You should input greater than 0 degree "
             } else {
-                document.getElementById('alert').innerHTML = ""
+                this.rule = ""
                 this.cannon.meriam.clr()
                 this.cannon.meriam.angle = (degree / 2) * -1
                 this.bullet.x = this.cannon.meriam.x
