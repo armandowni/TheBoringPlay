@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-8">
             <div id="gamePlay">
-                <canvas id="gameCanvas"></canvas>
+                <canvas id="gameCanvas" width="100"></canvas>
             </div>
             <div class="userBtn">
                 <v-row>
@@ -13,13 +13,11 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="3">
                         <v-btn elevation="4" id="fireBtn" rounded color="primary" v-on:click="fire()">{{t('fireBtn')}}</v-btn>
-
                     </v-col>
                     <v-col cols="12" sm="6" md="6">
                         <v-btn elevation="4" id="startBtn" rounded color="primary" value="Start Game" v-on:click="startGame()">{{t('startBtn')}}</v-btn>
                     </v-col>
                 </v-row>
-
             </div>
         </div>
         <div class="col-sm-4 " id="highScore">
@@ -30,7 +28,10 @@
             </v-tabs>
             <v-tabs-items v-model="tab">
                 <v-tab-item v-for="item in items" :key="item">
-                    <v-card>
+                    <div class="text-center py-16" v-if="loadScore">
+                        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                    </div>
+                    <v-card v-if="!loadScore">
                         <v-card-text>
                             <table id="tableScore">
                                 <thead id="headTable">

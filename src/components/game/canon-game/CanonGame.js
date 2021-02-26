@@ -25,6 +25,7 @@ import image from '@/assets/image/bird1.png'
 
 export default {
     name: 'CanonGame',
+    props: ['breakpointSize'],
     data() {
         return {
             // hud
@@ -33,6 +34,7 @@ export default {
             myScore: null,
             timer: null,
             allScore: [],
+            loadScore: true,
 
             // gameCanvas
             gameCanvas: null,
@@ -61,6 +63,7 @@ export default {
             items: [
                 'Highscore Top 50',
             ],
+            breakpoint: this.breakpointSize
         }
     },
     mounted() {
@@ -69,6 +72,8 @@ export default {
         this.angle = document.getElementById('inputDeg')
             // this.startBtn = new this.componentScore(this.gameCanvas, 50, 50, "green", 250, 200, "btnText");
         this.viewGame();
+        this.breakpoint = this.breakpoint - 30
+        console.log(this.breakpoint);
     },
     methods: {
         viewGame() {
@@ -132,6 +137,7 @@ export default {
             axios.get(restApi.globalStorage + "/api/highscorecanons/getAllData").then((data) => {
                 // console.log(data);
                 this.allScore = data.data
+                this.loadScore = false
             })
         },
         addDataPlayer(score) {

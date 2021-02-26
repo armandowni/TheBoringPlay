@@ -9,12 +9,12 @@
       <div v-else>
         <v-app id="inspire" transition="fade-transition">
           <header-component class="anotherHeader" />
-          <router-view></router-view>
+          <router-view :breakpointSize="breakpointSize"></router-view>
         </v-app>
       </div>
     </div>
 
-    <div class="text-center" id="loader" v-if="!load">
+    <div class="d-flex justify-center my-16" id="loader" v-if="!load">
       <v-progress-circular
         :size="100"
         :width="10"
@@ -70,11 +70,6 @@ export default {
 .anotherHeader {
   background-color: #0abcf9;
   background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
-}
-#loader {
-  position: fixed;
-  top: 45%;
-  left: 45%;
 }
 .v-application--wrap {
   min-height: 0vh;

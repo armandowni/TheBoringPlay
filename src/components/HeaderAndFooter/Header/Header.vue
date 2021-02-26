@@ -13,7 +13,7 @@
         aria-label="Toggle navigation"
         style="color: white"
       >
-        <span class="navbar-toggler-icon"></span>
+        <v-icon color="white">fas fa-bars</v-icon>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">

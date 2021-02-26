@@ -1,23 +1,24 @@
 <div id="home">
-    <!-- <div > -->
     <div id="landingSection">
         <HeaderComponent />
         <div class="container-fluid">
-            <div class="row" id="contain">
-                <div class="col-sm-6" id="right">
-                    <h1 class="white--text">{{t('HomeTitle')}}</h1>
-                    <p class="white--text">{{t('HomeDesc')}}</p>
-                    <a href="/collection">
-                        <v-btn rounded color="white" style="color: black;">
-                            {{t('BtnCollection')}}
-                            <v-icon style="margin-left: 10px;">fas fa-arrow-right</v-icon>
-                        </v-btn>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <img src="../../assets/landing_page.png" alt="">
-                </div>
-            </div>
+            <v-row>
+                <v-col>
+                    <v-container>
+                        <h1 class="text-center text-sm-left text-md-left text-lg-left white--text">{{t('HomeTitle')}}</h1>
+                        <p class="text-center text-sm-left text-md-left text-lg-left white--text">{{t('HomeDesc')}}</p>
+                        <a href="/collection" class="d-flex justify-center justify-sm-start justify-md-start justify-lg-start">
+                            <v-btn rounded color="white" style="color: black;">
+                                {{t('BtnCollection')}}
+                                <v-icon style="margin-left: 10px;">fas fa-arrow-right</v-icon>
+                            </v-btn>
+                        </a>
+                    </v-container>
+                </v-col>
+                <v-col>
+                    <v-img lazy-src="../../assets/landing_page.png" src="../../assets/landing_page.png"></v-img>
+                </v-col>
+            </v-row>
         </div>
     </div>
 
@@ -27,7 +28,7 @@
             <div class="col">
                 <v-item-group active-class="primary">
                     <v-row class="justify-space-between">
-                        <v-col v-for="n in 3" :key="n"  md="3">
+                        <v-col v-for="n in 3" :key="n" md="3">
                             <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 1">
                                 <div class="iconAbout">
                                     <v-icon x-large>fas fa-gamepad</v-icon>
@@ -60,5 +61,4 @@
 
     </div>
 
-    <!-- </div> -->
 </div>
