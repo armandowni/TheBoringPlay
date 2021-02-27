@@ -33,9 +33,9 @@
                             <div class="text-center" v-if="loadScore">
                                 <v-progress-circular indeterminate color="primary"></v-progress-circular>
                             </div>
-                            <v-simple-table fixed-header height="300px" v-if="!loadScore">
+                            <v-simple-table height="300px" v-if="!loadScore">
                                 <template v-slot:default>
-                                    <thead id="headTable">
+                                <thead id="headTable">
                                       <tr>
                                         <th class="text-left">
                                           No
@@ -48,14 +48,14 @@
                                         </th>
                                       </tr>
                                     </thead>
-                                    <tbody id="bodyTable">
-                                      <tr v-for="(score,index) in allScore.Data">
+                                <tbody id="bodyTable">
+                                    <tr v-for="(score,index) in allScore.Data">
                                         <td>{{ index+1 }}</td>
                                         <td>{{ score.username }}</td>
                                         <td>{{ score.score }}</td>
-                                      </tr>
-                                    </tbody>
-                                  </template>
+                                    </tr>
+                                </tbody>
+                                </template>
                             </v-simple-table>
                         </v-card-text>
                     </v-card>

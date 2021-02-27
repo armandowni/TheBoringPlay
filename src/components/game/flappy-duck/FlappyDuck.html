@@ -30,9 +30,9 @@
                             <div class="text-center" v-if="loadData">
                                 <v-progress-circular indeterminate color="primary"></v-progress-circular>
                             </div>
-                            <v-simple-table fixed-header height="300px" v-if="!loadData">
+                            <v-simple-table height="300px" v-if="!loadData">
                                 <template v-slot:default>
-                                    <thead class="headTable">
+                                    <thead id="headTable">
                                       <tr>
                                         <th class="text-left">
                                           No

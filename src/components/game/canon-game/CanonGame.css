@@ -16,6 +16,26 @@
     font-weight: 500;
 }
 
-#bodyTable tr:nth-child(odd) {
+table {
+    overflow: hidden;
+}
+
+#headTable {
+    background-color: dodgerblue;
+}
+
+#headTable tr th {
+    color: white;
+}
+
+#bodyTable tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+#bodyTable tr:nth-child(even):hover {
+    background-color: #f2f2f2;
+}
+
+#bodyTable tr:nth-child(odd):hover {
+    background-color: white;
 }
