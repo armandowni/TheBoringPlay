@@ -23,12 +23,12 @@ export default {
     methods: {
         changeLang(item) {
             this.lang = item
-            VueCookies.set('languange', item)
+            VueCookies.set('languange', "testing")
             this.$translate.setLang(this.lang.lang);
         },
         checkLang() {
             let langTemp = VueCookies.get('languange')
-            if (langTemp != null || langTemp.length > 0 || langTemp != undefined) {
+            if (langTemp != null) {
                 this.items.forEach(element => {
                     if (element.title === langTemp.title) {
                         this.lang = element
