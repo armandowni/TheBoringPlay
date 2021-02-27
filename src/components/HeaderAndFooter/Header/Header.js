@@ -18,7 +18,6 @@ export default {
         this.checkLang()
     },
     mounted() {
-        console.log(this.lang);
         this.$translate.setLang(this.lang.lang);
     },
     methods: {
