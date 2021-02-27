@@ -63,7 +63,6 @@ export default {
             items: [
                 'Highscore Top 50',
             ],
-            breakpoint: this.breakpointSize
         }
     },
     mounted() {
@@ -73,7 +72,6 @@ export default {
             // this.startBtn = new this.componentScore(this.gameCanvas, 50, 50, "green", 250, 200, "btnText");
         this.viewGame();
         this.breakpoint = this.breakpoint - 30
-        console.log(this.breakpoint);
     },
     methods: {
         viewGame() {

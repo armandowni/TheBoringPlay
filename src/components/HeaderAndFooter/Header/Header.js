@@ -30,12 +30,16 @@ export default {
         },
         checkLang() {
             let langTemp = VueCookies.get('languange')
-                // console.log(langTemp);
-            this.items.forEach(element => {
-                if (element.title === langTemp.title) {
-                    this.lang = element
-                }
-            });
+            if (langTemp != null || langTemp.length > 0 || langTemp != undefined) {
+                this.items.forEach(element => {
+                    if (element.title === langTemp.title) {
+                        this.lang = element
+                    }
+                });
+            } else {
+                this.lang = this.items[0]
+            }
+
         }
     },
 }

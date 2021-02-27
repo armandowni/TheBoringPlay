@@ -45,6 +45,7 @@ export default {
                 'Highscore Top 50',
             ],
             tab: null,
+            loadData: true,
         }
     },
     mounted() {
@@ -201,6 +202,7 @@ export default {
             axios.get(restApi.globalStorage + "/api/highscoreflappyducks/getAllData").then((data) => {
                 // console.log(data);
                 this.allScore = data.data
+                this.loadData = false
             })
         },
         addDataPlayer(score) {

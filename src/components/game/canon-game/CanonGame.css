@@ -3,7 +3,11 @@
 }
 
 #gameCanvas {
+    width: 100%;
+    background-image: url('../../../assets/image/download.png');
+    background-size: 100% 100%;
     border: 1px solid black;
+    margin: 10px 0px;
 }
 
 .titleCollection {
@@ -12,65 +16,6 @@
     font-weight: 500;
 }
 
-#headTable tr {
-    background-color: #007bff;
-    border-radius: 10px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    color: white;
-    display: block;
-}
-
-#headTable td {
-    padding: 10px 35px;
-    text-align: center;
-}
-
-#bodyTable {
-    display: block;
-    height: 300px;
-    overflow: auto;
-    margin-bottom: 10px;
-}
-
-#bodyTable td {
-    padding: 10px 35px;
-    text-align: center;
-    color: black;
-}
-
-#bodyTable tr:nth-child(even) {
+#bodyTable tr:nth-child(odd) {
     background-color: #f2f2f2;
-}
-
-
-/* width */
-
-#bodyTable::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 20px;
-}
-
-
-/* Track */
-
-#bodyTable::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 20px;
-}
-
-
-/* Handle */
-
-#bodyTable::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 20px;
-}
-
-
-/* Handle on hover */
-
-#bodyTable::-webkit-scrollbar-thumb:hover {
-    background: #555;
-    border-radius: 20px;
 }

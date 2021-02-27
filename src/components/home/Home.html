@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <v-row>
                 <v-col>
-                    <v-container>
+                    <v-container class="py-10 ma-0 py-md-16 pa-lg-16 ma-lg-16">
                         <h1 class="text-center text-sm-left text-md-left text-lg-left white--text">{{t('HomeTitle')}}</h1>
                         <p class="text-center text-sm-left text-md-left text-lg-left white--text">{{t('HomeDesc')}}</p>
                         <a href="/collection" class="d-flex justify-center justify-sm-start justify-md-start justify-lg-start">
@@ -24,41 +24,41 @@
 
     <div class="aboutSection">
         <h1>{{t('AboutUsTitle')}}</h1>
-        <div class="row" id="aboutSection">
-            <div class="col">
-                <v-item-group active-class="primary">
-                    <v-row class="justify-space-between">
-                        <v-col v-for="n in 3" :key="n" md="3">
-                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 1">
-                                <div class="iconAbout">
-                                    <v-icon x-large>fas fa-gamepad</v-icon>
-                                </div>
-                                <v-card-text class="justify-lg-center text font-weight-bold">
-                                    This application is made for people who are feeling bored. This application has a simple game that everyone can play. Some games have a highscore and some don't. This application can be played anywhere.
-                                </v-card-text>
-                            </v-card>
-                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 2">
-                                <div class="iconAbout">
-                                    <v-icon x-large>fas fa-laptop-code</v-icon>
-                                </div>
-                                <v-card-text class="justify-lg-center text font-weight-bold">
-                                    This application is based on javascript which makes it easy for developers to make games. Developers can also publish the game for free, Because we have a tag line "JUST MAKE IT". Open for anyone and everywhere.
-                                </v-card-text>
-                            </v-card>
-                            <v-card class="d-flex-center align-center" outlined width="250" v-if="n == 3">
-                                <div class="iconAbout">
-                                    <v-icon x-large>fas fa-users</v-icon>
-                                </div>
-                                <v-card-text class="justify-lg-center text font-weight-bold">
-                                    This application was created in 2020 which aims to help developers hone skills in coding. This application was built in collaboration with developers who are currently building careers in the IT world.
-                                </v-card-text>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                </v-item-group>
-            </div>
-        </div>
 
+        <v-item-group active-class="primary">
+            <v-container>
+                <v-row>
+                    <v-col v-for="n in 3" :key="n" cols="12" md="4">
+
+                        <v-card class="d-flex align-center" outlined height="300" v-if="n == 1">
+                            <div class="iconAbout py-16 px-5">
+                                <v-icon x-large class="py-16">fas fa-gamepad</v-icon>
+                            </div>
+                            <v-card-text class="justify-lg-center text font-weight-bold">
+                                {{t('aboutus.1')}}
+                            </v-card-text>
+                        </v-card>
+                        <v-card class="d-flex align-center" outlined height="300" v-if="n == 2">
+                            <div class="iconAbout py-16 px-5">
+                                <v-icon x-large class="py-16">fas fa-laptop-code</v-icon>
+                            </div>
+                            <v-card-text class="justify-lg-center text font-weight-bold">
+                                {{t('aboutus.2')}}
+                            </v-card-text>
+                        </v-card>
+                        <v-card class="d-flex align-center" outlined height="300" v-if="n == 3">
+
+                            <div class="iconAbout py-16 px-5">
+                                <v-icon x-large class="py-16">fas fa-users</v-icon>
+                            </div>
+                            <v-card-text class="justify-lg-center text font-weight-bold">
+                                {{t('aboutus.3')}}
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-item-group>
     </div>
 
 </div>
