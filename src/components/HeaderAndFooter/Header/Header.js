@@ -18,12 +18,14 @@ export default {
         this.checkLang()
     },
     mounted() {
+        // console.log(VueCookies.get('languange'));
+        // console.log(this.lang);
         this.$translate.setLang(this.lang.lang);
     },
     methods: {
         changeLang(item) {
             this.lang = item
-            VueCookies.set('languange', "testing")
+            VueCookies.set('languange', this.lang)
             this.$translate.setLang(this.lang.lang);
         },
         checkLang() {
