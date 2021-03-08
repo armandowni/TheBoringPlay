@@ -69,6 +69,14 @@ export default {
             this.viewDataPlayer()
         },
         startGame() {
+            if (myGameArea.interval != null) {
+                clearInterval(myGameArea.interval)
+                myGameArea.stop();
+                this.myObstacles = []
+                this.myObstacles.push(new this.component(50, 160, "green", 500, 0));
+                this.myObstacles.push(new this.component(50, 160, "green", 500, 250));
+                myGameArea.frameNo = 0
+            }
             this.myGamePiece = new this.component(50, 50, this.duck, 10, 150, 'image');
             this.myGamePiece.gravity = 0.05;
             this.myScore = new this.component("30px", "Consolas", "black", 280, 40, "text");
@@ -158,6 +166,7 @@ export default {
                     this.myObstacles.push(new this.component(50, 160, "green", 500, 250));
                     this.disableBtnJump = true;
                     this.disableBtnStart = false;
+                    this.viewGame();
                     return;
                 }
             }

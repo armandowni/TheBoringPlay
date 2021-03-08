@@ -8,10 +8,12 @@
             <div class="userBtn">
                 <v-row>
                     <v-col cols="12" sm="6" md="3">
-                        <v-btn elevation="4" rounded color="primary" id="startBtn" v-on:mousedown="jump(-0.2)" v-on:mouseup="jump(0.05)" v-on:touchend="jump(0.05)" v-on:touchstart="jump(-0.2)" :style="{left: '50%', transform:'translateX(-50%)'}">{{t('jumpBtn')}}</v-btn>
+                        <v-btn elevation="4" rounded color="primary" id="startBtn" v-on:mousedown="jump(-0.2)" v-on:mouseup="jump(0.05)" v-on:touchend="jump(0.05)" v-on:touchstart="jump(-0.2)" :style="{left: '50%', transform:'translateX(-50%)'}" :disabled="disableBtnJump">{{t('jumpBtn')}}</v-btn>
                     </v-col>
                     <v-col cols="12" sm="6" md="6">
-                        <v-btn elevation="4" rounded color="primary" id="startBtn" value="Start Game" v-on:click="startGame()" :style="{left: '50%', transform:'translateX(-50%)'}">{{t('startBtn')}}</v-btn>
+                        <v-btn elevation="4" id="startBtn" rounded color="primary" value="Start Game" v-on:click="startGame()" :style="{left: '50%', transform:'translateX(-50%)'}" v-if="disableBtnStart == false">{{t('startBtn')}}</v-btn>
+
+                        <v-btn elevation="4" id="startBtn" rounded color="primary" value="Restart Game" v-on:click="startGame()" :style="{left: '50%', transform:'translateX(-50%)'}" v-if="disableBtnStart == true">{{t('restartBtn')}}</v-btn>
                     </v-col>
                 </v-row>
 

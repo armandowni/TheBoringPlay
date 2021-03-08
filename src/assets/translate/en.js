@@ -15,6 +15,7 @@ export default Vue.locales({
         'AboutUsTitle': 'About Us',
         'ComingSoon': 'Coming Soon',
         'startBtn': 'Start Game',
+        'restartBtn': 'Restart Game',
         'fireBtn': 'Fire',
         'jumpBtn': 'Jump',
     }

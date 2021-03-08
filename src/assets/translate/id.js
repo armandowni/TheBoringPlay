@@ -15,6 +15,7 @@ export default Vue.locales({
         'AboutUsTitle': 'Tentang Kami',
         'ComingSoon': 'Akan Datang',
         'startBtn': 'Mulai Permainan',
+        'restartBtn': 'mulai ulang permainan',
         'fireBtn': 'Tembak',
         'jumpBtn': 'lompat',
     }

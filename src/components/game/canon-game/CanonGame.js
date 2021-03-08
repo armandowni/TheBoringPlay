@@ -46,10 +46,10 @@ export default {
             tembak: false,
 
             // another var
-            angle: null,
             valueAngle: 0,
-            buttonFire: null,
-            // startBtn: null,
+            Angle: true,
+            buttonFire: false,
+            startBtn: false,
             score: 0,
             bird: image,
             rule: '',
@@ -63,27 +63,30 @@ export default {
             items: [
                 'Highscore Top 50',
             ],
+            min: 0,
+            max: 90,
         }
     },
     mounted() {
         this.gameCanvas = document.getElementById("gameCanvas");
-        this.buttonFire = document.getElementById('fireBtn')
-        this.angle = document.getElementById('inputDeg')
-            // this.startBtn = new this.componentScore(this.gameCanvas, 50, 50, "green", 250, 200, "btnText");
         this.viewGame();
         this.breakpoint = this.breakpoint - 30
     },
     methods: {
         viewGame() {
             myGameArea.view(this.gameCanvas)
+            this.Angle = true
             this.disabledBtn();
             this.viewDataPlayer();
             this.utility();
             this.updateGameArea();
             this.clock();
-            // this.startbtn();
         },
         startGame() {
+            if (this.timer != null) {
+                clearInterval(this.timer)
+            }
+            this.Angle = false
             this.berhenti = false
             myGameArea.start(this.gameCanvas);
             this.clock();
@@ -98,16 +101,17 @@ export default {
                 this.timer = setInterval(function() {
                     x.printClock(myGameArea.waktu);
                     if (myGameArea.waktu == -1) {
-                        x.addDataPlayer(x.score)
+                        console.log(myGameArea.waktu);
                         x.score = 0
                         x.valueAngle = 0
                         x.berhenti = true
                         x.tembak = false
-                        x.buttonFire.disabled = false
+                        x.buttonFire = false
                         x.hit = false
-                        x.printPeluru()
-                        x.viewGame()
                         clearInterval(x.timer)
+                        x.viewGame()
+                        x.printPeluru()
+                        x.addDataPlayer(x.score)
                     } else {
                         myGameArea.waktu--
                             // myGameArea.clear(this.gameCanvas)
@@ -309,14 +313,12 @@ export default {
 
         // for button
         enableBtn() {
-            this.buttonFire.disabled = false
-                // this.startBtn.disabled = true
-            this.angle.disabled = false
+            this.buttonFire = false
+            this.startBtn = true
         },
         disabledBtn() {
-            // this.startBtn.disabled = false
-            this.buttonFire.disabled = true
-            this.angle.disabled = true
+            this.buttonFire = true
+            this.startBtn = false
         },
         // end for button
 
@@ -389,8 +391,8 @@ export default {
             this.bullet.update()
         },
         fire() {
-            this.buttonFire.disabled = true
             this.tembak = true
+            this.Angle = true
             this.peluru()
         },
         peluru() {
@@ -412,12 +414,12 @@ export default {
                     if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
                         crash = false;
                     }
-                    if (glovar.bullet.x >= myGameArea.width || glovar.bullet.y >= glovar.ground.y - 10 || glovar.bullet.y <= 0) {
+                    if (glovar.bullet.x >= 640 || glovar.bullet.y >= glovar.ground.y - 10 || glovar.bullet.y <= 0) {
                         glovar.bullet.x = glovar.cannon.meriam.x
                         glovar.bullet.y = glovar.cannon.meriam.y
                         glovar.bullet.gravitySpeed = 0
                         glovar.tembak = false
-                        glovar.buttonFire.disabled = false
+                        glovar.Angle = false
                         glovar.printPeluru()
                         clearInterval(tembakan)
                     } else if (crash == true) {
@@ -426,11 +428,10 @@ export default {
                         glovar.bullet.y = glovar.cannon.meriam.y
                         glovar.bullet.gravitySpeed = 0
                         glovar.tembak = false
-                        glovar.buttonFire.disabled = false
+                        glovar.buttonFire = false
                         glovar.score += 100
                         glovar.hit = true
-
-                        // glovar.randomBurung()
+                        glovar.Angle = false
                         glovar.printPeluru()
                         glovar.scoreUpdate(glovar.score)
                         clearInterval(tembakan)
