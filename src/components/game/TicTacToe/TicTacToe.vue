@@ -1,6 +1,70 @@
 
 <template>
-    <div>Testing</div>
+  <div class="container" id="tictactoe">
+    <h1 class="titleCollection">Tic Tac Toe Game</h1>
+    <div class="row">
+      <div class="col-sm-6 col-lg-8">
+        <div id="gamePlay">
+          <canvas></canvas>
+        </div>
+        <div class="userBtn">
+          <!-- <v-row>
+            <v-col cols="12" sm="6" md="6">
+              <v-btn
+                elevation="4"
+                rounded
+                color="primary"
+                id="startBtn"
+                value="Start Game"
+                v-on:click="startGame()"
+                :style="{ left: '50%', transform: 'translateX(-50%)' }"
+                >{{ t("startBtn") }}</v-btn
+              >
+            </v-col>
+          </v-row> -->
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
+          <v-tab v-for="item in items" :key="item">
+            {{ item }}
+          </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="tab">
+          <v-tab-item v-for="item in items" :key="item">
+            <v-card>
+              <v-card-text>
+                <div class="text-center" v-if="loadData">
+                  <v-progress-circular
+                    indeterminate
+                    color="primary"
+                  ></v-progress-circular>
+                </div>
+                <v-simple-table height="300px" v-if="!loadData">
+                  <template v-slot:default>
+                    <thead id="headTable">
+                      <tr>
+                        <th class="text-left">No</th>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Score</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bodyTable">
+                      <!-- <tr v-for="(score, index) in allScore.Data">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ score.username }}</td>
+                        <td>{{ score.score }}</td>
+                      </tr> -->
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script src="./TicTacToe.js"></script>
