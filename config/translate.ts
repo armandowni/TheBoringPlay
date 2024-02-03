@@ -3,9 +3,9 @@ import indonesia from "../assets/translate/id.json";
 
 export default defineI18nConfig(() => ({
   legacy: true,
-  locale: "en",
+  locale: "gb",
   messages: {
-    en: english,
+    gb: english,
     id: indonesia,
   },
 }));

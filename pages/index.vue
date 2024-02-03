@@ -2,9 +2,9 @@
   <div class="home">
     <div class="landingSection">
       <div class="title">
-        <span>{{ $t("HomeTitle") }}</span>
+        <span class="text-white">{{ $t("HomeTitle") }}</span>
         <span class="text-base font-normal">{{ $t("HomeDesc") }}</span>
-        <a href="/collection">
+        <a href="/collection" class="font-normal">
           <font-awesome-icon icon="fas fa-arrow-right" class="cursor-pointer" />
           {{ $t("BtnCollection") }}
         </a>

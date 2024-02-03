@@ -12,8 +12,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
-    "@types/cors": "^2.8.12"
+  "resolutions": {
+    "string-width": "4.2.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -27,6 +27,7 @@
     "daisyui": "^4.6.0",
     "esm": "^3.2.25",
     "nuxt": "^3.9.3",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vue-country-flag-next": "^2.3.2"
   }
 }
