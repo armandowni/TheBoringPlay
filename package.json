@@ -1,66 +1,33 @@
 {
-  "name": "gamefreetime",
-  "version": "0.1.0",
+  "name": "theboringplay",
+  "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node server.js"
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
   },
-  "dependencies": {
-    "@sendgrid/mail": "^7.4.2",
-    "axios": "^0.21.1",
-    "core-js": "^3.6.5",
-    "express": "^4.17.1",
-    "sendgrid": "^5.2.3",
-    "serve-static": "^1.14.1",
-    "vue": "^2.6.11",
-    "vue-cookies": "^1.7.4",
-    "vue-country-flag": "^2.0.3",
-    "vue-route": "^1.5.1",
-    "vue-route-generator": "^0.5.1",
-    "vue-router": "^3.2.0",
-    "vue-router-layout": "^0.1.2",
-    "vue-translate-plugin": "^1.3.1",
-    "vuetify": "^2.4.4"
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --dotenv .env.local --port 3007",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "@nuxtjs/vuetify": "^1.11.3",
-    "@vue/cli-plugin-babel": "^4.5.9",
-    "@vue/cli-plugin-eslint": "^4.5.9",
-    "@vue/cli-plugin-router": "^4.5.9",
-    "@vue/cli-service": "^4.5.9",
-    "babel-eslint": "^10.1.0",
-    "deepmerge": "^4.2.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.32.8",
-    "sass-loader": "^10.1.1",
-    "vue-auto-routing": "^0.5.0",
-    "vue-cli-plugin-auto-routing": "~0.4.1",
-    "vue-cli-plugin-vuetify": "~2.1.0",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
+    "@types/cors": "^2.8.12"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
+    "@fortawesome/vue-fontawesome": "^3.0.1",
+    "@headlessui/vue": "^1.7.17",
+    "@nuxtjs/i18n": "^8.0.1",
+    "@nuxtjs/tailwindcss": "^6.4.0",
+    "axios": "^1.6.7",
+    "daisyui": "^4.6.0",
+    "esm": "^3.2.25",
+    "nuxt": "^3.9.3",
+    "typescript": "^4.9.5"
+  }
 }

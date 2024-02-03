@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .heading {
+    @apply text-4xl !important;
+    @apply font-bold !important;
+  }
+  .sub-title {
+    @apply font-bold;
+    @apply text-2xl;
+  }
+  .input {
+    @apply border-2;
+    @apply border-black;
+    @apply rounded-md;
+  }
+  input,
+  textarea {
+    @apply px-5;
+    @apply py-2;
+  }
+
+  .card {
+    @apply border-black;
+    @apply border-2;
+    @apply rounded-md;
+    @apply w-80;
+    @apply h-auto;
+    @apply text-black;
+    @apply border-opacity-50;
+  }
+  .card-body {
+    @apply p-3;
+    @apply z-10
+  }
+  .card-body > .card-title {
+    @apply text-black;
+    @apply text-3xl;
+    @apply font-semibold;
+  }
+  .card > .card-img {
+    @apply p-0;
+  }
+  .card-body > .card-text {
+    @apply text-black;
+    @apply text-sm;
+  }
+  .card-body > .card-action {
+    @apply text-black;
+    @apply w-full;
+  }
+}
