@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n"],
   i18n: {
-    vueI18n: "~/config/translate.ts",
+    // vueI18n: "~/config/translate.ts",
     defaultLocale: "en",
   },
 });
