@@ -6,13 +6,12 @@ export function useApi(baseUrl: string, config?: any) {
   if (!baseUrl) throw new Error("base url is undefined");
 
   const api = axios.create({
-    // baseURL: process.env.NUXT_API_SECRET,
     headers: { "content-type": "application/json" },
   });
 
   // console.log(configNuxt);
 
-  const base_path = `${baseUrl}/api/${API_VER}`;
+  const base_path = `${baseUrl}/api`;
 
   const get = async (url: string, query?: string) => {
     const path = base_path + url;

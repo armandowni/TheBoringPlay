@@ -9,7 +9,7 @@
           {{ $t("BtnCollection") }}
         </a>
       </div>
-      <img src="../assets//landing_page.png" alt="Cannot Reload" />
+      <img src="../assets/landing_page.png" alt="Cannot Reload" />
     </div>
 
     <div class="aboutSection">

@@ -26,6 +26,5 @@ function doLoading() {
 .content {
   @apply px-10;
   @apply py-10;
-  @apply lg:py-0;
 }
 </style>

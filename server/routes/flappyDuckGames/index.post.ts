@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const data = await api.del(`/test/${body.id}`);
+    const data = await api.post("/test", body);
     // console.log(data);
     return data;
   } catch (error) {
