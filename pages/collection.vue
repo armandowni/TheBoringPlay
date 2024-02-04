@@ -31,7 +31,7 @@ async function getDataCollection() {
 }
 function loadBgImage(params) {
   console.log(url);
-  return "~/_nuxt/assets/images/" + params;
+  return "~/assets/images/" + params;
 }
 function initPages() {
   getDataCollection();
