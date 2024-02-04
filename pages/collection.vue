@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+import url from "@/assets/images/comingsoon.png";
 import fetchData from "~/util/fetchData";
 
 const collectionGames = ref([]);
@@ -29,7 +30,8 @@ async function getDataCollection() {
   collectionGames.value = result?.Data;
 }
 function loadBgImage(params) {
-  return "/_nuxt/assets/images/" + params;
+  console.log(url);
+  return "~/_nuxt/assets/images/" + params;
 }
 function initPages() {
   getDataCollection();
