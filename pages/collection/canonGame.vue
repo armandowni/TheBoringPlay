@@ -5,7 +5,7 @@
     <span class="text-4xl font-bold text-center">Canon Game</span>
     <div class="games">
       <div class="flex flex-col gap-3">
-        <canvas id="gameCanvas" width="100"></canvas>
+        <canvas id="gameCanvas" width="640" height="400"></canvas>
         <div class="flex" id="actions">
           <button
             class="bg-blue-500 rounded-lg px-3 py-2 w-full"
@@ -287,7 +287,7 @@ function componentScore(Canvas, width, height, color, xTemp, yTemp, type) {
       ctx.fillText(text, x, y);
     } else if (type == "image") {
       // console.log(xUpdate);
-      ctx.drawImage(image, x, y, width, height);
+      // ctx.drawImage(image, x, y, width, height);
     } else {
       ctx.fillStyle = color;
       ctx.fillRect(x, y, width, height);
@@ -326,17 +326,15 @@ function componentCanon(gameCanvas, width, height, color, xTemp, yTemp) {
 function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
   // function for draw rect,circle,and many more
 
-  const BulletSpeed = 5;
-  const gravity = 0.05;
+  const BulletSpeed = 8;
+  const gravity = 10;
   let x = xTemp;
   let y = yTemp;
-  let gravitySpeed = 0;
   const ctx = gameCanvas.getContext("2d");
 
   const update = function (xUpdate, yUpdate) {
     x = xUpdate || x;
     y = yUpdate || y;
-    // console.log(x, y);
     ctx.beginPath();
     ctx.fillStyle = color;
     ctx.save();
@@ -346,24 +344,12 @@ function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
     ctx.fill();
     ctx.restore();
   };
-  const newPos = function () {
-    console.log("start position : ", y);
-    x += speedX;
-    y += gravitySpeed;
-    gravitySpeed += gravity;
-    console.log("new position : ", y);
-    return y;
-  };
-  const gravitySpeedReset = function () {
-    gravitySpeed = 0;
-  };
+
   const clr = function () {
     ctx.clearRect(x - 5, y - 5, 10, 10);
   };
   return {
     update,
-    newPos,
-    gravitySpeedReset,
     clr,
     x,
     y,
@@ -371,7 +357,6 @@ function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
     height,
     BulletSpeed,
     gravity,
-    gravitySpeed,
   };
 }
 
@@ -448,7 +433,6 @@ function peluru() {
       if (bullet.x >= 640 || bullet.y >= ground.y - 10 || bullet.y <= 0) {
         bullet.x = cannon.meriam.x;
         bullet.y = cannon.meriam.y;
-        bullet.gravitySpeedReset();
         tembak = false;
         Angle = false;
         bullet.update(cannon.meriam.x, bullet.y);
@@ -457,7 +441,6 @@ function peluru() {
         // console.log("Kena");
         bullet.x = cannon.meriam.x;
         bullet.y = cannon.meriam.y;
-        bullet.gravitySpeedReset();
         tembak = false;
         score += 100;
         hit = true;
@@ -472,11 +455,11 @@ function peluru() {
           (cannon.meriam.calculateAngle(valueAngle.value) * 3.14) / 90;
         bullet.x += Math.cos(rotation) * bullet.BulletSpeed;
         bullet.y += Math.sin(rotation) * bullet.BulletSpeed;
-
-        const yBullet = bullet.newPos();
-        bullet.update(bullet.x, yBullet);
+        if (bullet.y < 100) bullet.y += bullet.gravity;
+        console.log(bullet);
+        bullet.update(bullet.x, bullet.y);
       }
-    }, 30);
+    }, 50);
   }
 }
 // end peluru
