@@ -70,10 +70,12 @@ init();
   @apply bg-white;
   @apply text-black;
   @apply p-5;
+  @apply px-3;
   @apply text-2xl;
   @apply flex;
   @apply justify-between;
   @apply items-center;
+  @apply gap-5;
 }
 .header > .icon-menu {
   @apply flex;
@@ -94,11 +96,15 @@ init();
   @apply items-center;
   @apply gap-3;
   @apply font-bold;
-  @apply bg-blue-400;
-  @apply text-white;
-  @apply px-3;
-  @apply py-2;
+  @apply bg-transparent;
+  @apply lg:bg-blue-400;
+  @apply text-black;
+  @apply lg:text-white;
+  @apply p-0;
+  @apply lg:px-3;
+  @apply lg:py-2;
   @apply rounded-lg;
+  @apply text-base;
 }
 .header > .icon-menu > .title > img {
   @apply bg-white;
