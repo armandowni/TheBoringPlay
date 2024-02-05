@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [{ rel: "icon", href: "~/assets/favicon.ico" }],
-      title: "Nuxt 3 - DaisyUI",
+      title: "The Boring Play",
       meta: [
         {
           name: "description",

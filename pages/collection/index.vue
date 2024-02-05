@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center text-white">
-    <span class="text-4xl text-center">{{ $t("CollectionMenu") }}</span>
+    <span class="text-4xl font-bold text-center">{{ $t("CollectionMenu") }}</span>
     <div class="collectionGames">
       <div
         class="collectionGames-card"

@@ -2,10 +2,15 @@
   <div
     class="flex flex-col justify-center items-center gap-3 w-full text-white"
   >
-    <span class="text-4xl text-center">Flappy Duck</span>
+    <span class="text-4xl font-bold text-center">Flappy Duck</span>
     <div class="games">
-      <canvas></canvas>
-      <div class="highscore">
+      <div class="flex flex-col">
+        <canvas id="gameCanvas" width="100"></canvas>
+        <div class="flex" id="actions">
+          <button class="bg-blue-500 text-black rounded-lg px-3 py-2"> Start Game</button>
+        </div>
+      </div>
+      <div class="highscore w-[350px] lg:w-full">
         <Table :dataHeaders="header" :dataTable="highscore" />
       </div>
     </div>
@@ -20,7 +25,6 @@ const header = [
   { name: "Players Name", key: "username" },
   { name: "Score", key: "score" },
 ];
-const highscore = ref([]);
 
 async function getDataHighScore() {
   const result = await fetchData("/flappyDuckGames", "get");
@@ -28,11 +32,11 @@ async function getDataHighScore() {
   highscore.value = result;
 }
 
-function initPages() {
-  getDataHighScore();
-}
+onMounted(() => {
+  // viewGame();
 
-initPages();
+  getDataHighScore();
+});
 </script>
 <style scoped>
 .games {

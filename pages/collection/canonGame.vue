@@ -2,9 +2,50 @@
   <div
     class="flex flex-col justify-center items-center gap-3 w-full text-white"
   >
-    <span class="text-4xl text-center">Canon Game</span>
+    <span class="text-4xl font-bold text-center">Canon Game</span>
     <div class="games">
-      <canvas></canvas>
+      <div class="flex flex-col gap-3">
+        <canvas id="gameCanvas" width="100"></canvas>
+        <div class="flex" id="actions">
+          <button
+            class="bg-blue-500 rounded-lg px-3 py-2 w-full"
+            v-if="berhenti"
+            v-on:click="() => startGame()"
+          >
+            Start Game
+          </button>
+
+          <div
+            class="flex flex-col justify-center gap-5 w-full"
+            v-else-if="!berhenti"
+          >
+            <div class="flex gap-5 items-center">
+              <input
+                type="range"
+                min="0"
+                max="90"
+                v-model="valueAngle"
+                :onchange="() => updateCanon()"
+                class="range range-primary range-md"
+              />
+              <input
+                type="number"
+                min="0"
+                max="90"
+                v-model="valueAngle"
+                :onchange="() => updateCanon()"
+                class="px-5 text-center bg-white text-black border-2 rounded-lg border-black"
+              />
+            </div>
+            <button
+              class="bg-blue-500 rounded-lg px-3 py-2 flex-1"
+              :onclick="() => fire()"
+            >
+              Shoot
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="highscore">
         <Table :dataHeaders="header" :dataTable="highscore" />
       </div>
@@ -14,6 +55,7 @@
 
 <script setup>
 import fetchData from "~/util/fetchData";
+import imageBird from "~/assets/images/bird1.png";
 
 const header = [
   { name: "No", key: "no" },
@@ -27,21 +69,446 @@ async function getDataHighScore() {
   //   console.log(result);
   highscore.value = result;
 }
+// gameCanvas
+const gameCanvas = () => document.getElementById("gameCanvas");
 
-function initPages() {
-  getDataHighScore();
+// hud
+let ground = null;
+let time = null;
+let myScore = null;
+let timer = null;
+
+// boolean var
+const berhenti = ref(true);
+let hit = false;
+let tembak = false;
+
+// another var
+const valueAngle = ref(0);
+let Angle = true;
+let score = 0;
+let rule = "";
+
+// character
+let cannon = null;
+let target = null;
+let bullet = null;
+const speedX = 0;
+const speedY = 0;
+const xBird = () => Math.floor(Math.random() * 200) + 200;
+const yBird = () => Math.floor(Math.random() * 200) + 100;
+
+let tab = null;
+let items = ["Highscore Top 50"];
+let waktu = 60;
+// gameArea
+let myGameArea = {
+  start: function (gameCanvas) {
+    gameCanvas.width = 640;
+    gameCanvas.height = 400;
+    const context = gameCanvas.getContext("2d");
+    context.filter = "grayscale(0)";
+    waktu = 60;
+  },
+  view: function (gameCanvas) {
+    gameCanvas.width = 640;
+    gameCanvas.height = 400;
+    const context = gameCanvas.getContext("2d");
+    context.filter = "grayscale(50)";
+    waktu = 60;
+  },
+  clear: function (gameCanvas) {
+    const context = gameCanvas.getContext("2d");
+    context.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+  },
+};
+
+function viewGame() {
+  const canvas = gameCanvas();
+  myGameArea.view(canvas);
+  Angle = true;
+  utility();
+  updateGameArea();
+  clock();
 }
 
-initPages();
+function startGame() {
+  if (timer != null) {
+    clearInterval(timer);
+  }
+  Angle = false;
+  berhenti.value = false;
+  myGameArea.start(gameCanvas());
+  clock();
+}
+
+// clock function
+function clock() {
+  if (berhenti.value == false) {
+    timer = setInterval(function () {
+      printClock(waktu);
+      if (waktu == -1) {
+        // console.log(waktu);
+        score = 0;
+        valueAngle.value = 0;
+        berhenti.value = true;
+        tembak = false;
+        hit = false;
+        clearInterval(timer);
+        viewGame();
+        bullet.update();
+        // addDataPlayer(score);
+      } else {
+        waktu--;
+      }
+    }, 1000);
+  } else {
+    printClock(waktu);
+  }
+}
+function printClock(second) {
+  updateGameArea();
+  time.update("Time: " + second);
+}
+// end clock
+
+// view and add data player
+
+function addDataPlayer(score) {
+  if (confirm("Are you sure you want to save your highscore?")) {
+    let nama = prompt("Enter your name: ");
+
+    let addData = {
+      username: nama,
+      score: score,
+    };
+
+    // axios
+    //   .post(
+    //     restApi.globalStorage + "/api/highscorecanons/addDataPlayer",
+    //     addData
+    //   )
+    //   .then((result) => {
+    //     let results = result.statusText;
+    //     if (results === "OK") {
+    //       alert(result.data.Data);
+    //       viewGame();
+    //     } else {
+    //       alert("Can't save data, please wait or refresh the page");
+    //       viewGame();
+    //     }
+    //   });
+  } else {
+    alert("okay no problemo");
+  }
+}
+// end view and add data player
+
+// make some character and hud in this function
+function utility() {
+  myScore = new componentScore(
+    gameCanvas(),
+    "20px",
+    "Consolas",
+    "black",
+    280,
+    40,
+    "text"
+  );
+  ground = new component(gameCanvas(), 630, 100, "chocolate", 5, 350);
+  time = new componentScore(
+    gameCanvas(),
+    "20px",
+    "Consolas",
+    "black",
+    500,
+    40,
+    "text"
+  );
+  cannon = {
+    ban: new component(gameCanvas(), 50, 10, "black", 15, 340),
+    meriam: new componentCanon(gameCanvas(), 60, 20, "red", 40, 310),
+    tiang: new component(gameCanvas(), 10, 30, "black", 30, 310),
+  };
+
+  target = new componentScore(
+    gameCanvas(),
+    50,
+    50,
+    imageBird,
+    xBird(),
+    yBird(),
+    "image"
+  );
+  bullet = new componentBullet(
+    gameCanvas(),
+    10,
+    10,
+    "black",
+    cannon.meriam.x,
+    cannon.meriam.y
+  );
+}
+
+// component
+function component(Canvas, widthTemp, heightTemp, color, xTemp, yTemp) {
+  let width = widthTemp;
+  let height = heightTemp;
+  let x = xTemp;
+  let y = yTemp;
+
+  const ctx = Canvas.getContext("2d");
+  const update = function () {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, height);
+    // ctx.lineWidth = 1
+  };
+
+  const clr = function () {
+    ctx.clearRect(0, 0, width, height);
+  };
+  return { update, clr, x, y, width, height };
+}
+function componentScore(Canvas, width, height, color, xTemp, yTemp, type) {
+  const image = new Image();
+  if (type == "image") {
+    image.src = color;
+  }
+  const ctx = Canvas.getContext("2d");
+  let x = xTemp;
+  let y = yTemp;
+
+  const update = function (text, xUpdate, yUpdate) {
+    x = xUpdate || x;
+    y = yUpdate || y;
+    if (type == "text") {
+      ctx.font = width + " " + height;
+      ctx.fillStyle = color;
+      ctx.fillText(text, x, y);
+    } else if (type == "image") {
+      // console.log(xUpdate);
+      ctx.drawImage(image, x, y, width, height);
+    } else {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, width, height);
+    }
+  };
+
+  const clr = function () {
+    ctx.clearRect(247, 180, 115, 30);
+  };
+  return { update, clr, text: "", x, y };
+}
+function componentCanon(gameCanvas, width, height, color, xTemp, yTemp) {
+  // function for draw rect,circle,and many more
+  let angle = 0;
+  let x = xTemp;
+  let y = yTemp;
+  const ctx = gameCanvas.getContext("2d");
+  const update = function (angletemp) {
+    angle = angletemp;
+    ctx.fillStyle = color;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate((angletemp * 3.14) / 90);
+    ctx.fillRect(width / -6, height / -2, width, height);
+    ctx.lineWidth = 1;
+    ctx.restore();
+  };
+  const calculateAngle = function (angleUpdate) {
+    return (angleUpdate / 2) * -1;
+  };
+  const clr = function () {
+    ctx.clearRect(x - 15, y - 66, 100, 80);
+  };
+  return { update, clr, calculateAngle, x, y, angle };
+}
+function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
+  // function for draw rect,circle,and many more
+
+  const BulletSpeed = 5;
+  const gravity = 0.05;
+  let x = xTemp;
+  let y = yTemp;
+  let gravitySpeed = 0;
+  const ctx = gameCanvas.getContext("2d");
+
+  const update = function (xUpdate, yUpdate) {
+    x = xUpdate || x;
+    y = yUpdate || y;
+    // console.log(x, y);
+    ctx.beginPath();
+    ctx.fillStyle = color;
+    ctx.save();
+    ctx.rotate((0 * 3.14) / 90);
+    ctx.arc(x, y, 8, 0, 2 * 3.14);
+    ctx.lineWidth = 1;
+    ctx.fill();
+    ctx.restore();
+  };
+  const newPos = function () {
+    console.log("start position : ", y);
+    x += speedX;
+    y += gravitySpeed;
+    gravitySpeed += gravity;
+    console.log("new position : ", y);
+    return y;
+  };
+  const gravitySpeedReset = function () {
+    gravitySpeed = 0;
+  };
+  const clr = function () {
+    ctx.clearRect(x - 5, y - 5, 10, 10);
+  };
+  return {
+    update,
+    newPos,
+    gravitySpeedReset,
+    clr,
+    x,
+    y,
+    width,
+    height,
+    BulletSpeed,
+    gravity,
+    gravitySpeed,
+  };
+}
+
+// end component
+
+// updateGameArea
+function updateGameArea() {
+  const text = "SCORE: " + score;
+  myGameArea.clear(gameCanvas());
+  ground.update();
+  target.update();
+  myScore.update(text);
+  printCannonChar(cannon.meriam.calculateAngle(valueAngle.value));
+  bullet.update();
+}
+// endUpdateArea
+
+//  score
+
+// cannon function
+function printCannonChar(angle) {
+  cannon.ban.update();
+  cannon.tiang.update();
+  cannon.meriam.update(angle);
+}
+
+function updateCanon() {
+  const degree = valueAngle.value;
+  if (degree > 90) {
+    rule = "You cannon input greater than 90 degree ";
+  } else if (degree < 0) {
+    rule = "You should input greater than 0 degree ";
+  } else {
+    rule = "";
+    cannon.meriam.clr();
+    const angleCannon = cannon.meriam.calculateAngle(degree);
+    printCannonChar(angleCannon);
+    bullet.update(cannon.meriam.x, cannon.meriam.y);
+  }
+}
+// end cannon function
+
+// peluru function
+
+function fire() {
+  tembak = true;
+  Angle = true;
+  peluru();
+}
+
+function peluru() {
+  if (tembak == false) {
+    bullet.x = 80;
+    bullet.update();
+  } else {
+    let tembakan = setInterval(function () {
+      const myleft = bullet.x;
+      const myright = bullet.x + bullet.width;
+      const mytop = bullet.y;
+      const mybottom = bullet.y + bullet.height;
+      const otherleft = target.x + 15;
+      const otherright = target.x + target.width;
+      const othertop = target.y + 15;
+      const otherbottom = target.y + target.height;
+      let crash = true;
+      if (
+        mybottom < othertop ||
+        mytop > otherbottom ||
+        myright < otherleft ||
+        myleft > otherright
+      ) {
+        crash = false;
+      }
+      if (bullet.x >= 640 || bullet.y >= ground.y - 10 || bullet.y <= 0) {
+        bullet.x = cannon.meriam.x;
+        bullet.y = cannon.meriam.y;
+        bullet.gravitySpeedReset();
+        tembak = false;
+        Angle = false;
+        bullet.update(cannon.meriam.x, bullet.y);
+        clearInterval(tembakan);
+      } else if (crash == true) {
+        // console.log("Kena");
+        bullet.x = cannon.meriam.x;
+        bullet.y = cannon.meriam.y;
+        bullet.gravitySpeedReset();
+        tembak = false;
+        score += 100;
+        hit = true;
+        Angle = false;
+        target.update("", xBird(), yBird());
+        bullet.update(bullet.x, bullet.y);
+        myScore.update(score);
+        clearInterval(tembakan);
+      } else {
+        bullet.clr();
+        const rotation =
+          (cannon.meriam.calculateAngle(valueAngle.value) * 3.14) / 90;
+        bullet.x += Math.cos(rotation) * bullet.BulletSpeed;
+        bullet.y += Math.sin(rotation) * bullet.BulletSpeed;
+
+        const yBullet = bullet.newPos();
+        bullet.update(bullet.x, yBullet);
+      }
+    }, 30);
+  }
+}
+// end peluru
+
+onMounted(() => {
+  viewGame();
+  getDataHighScore();
+});
 </script>
 <style scoped>
 .games {
   @apply flex;
+  @apply flex-col;
+  @apply lg:flex-row;
   @apply w-full;
   @apply justify-between;
-  @apply gap-3;
+  @apply gap-10;
   @apply bg-white;
   @apply p-5;
+  @apply rounded-lg;
+  @apply h-full;
+  @apply lg:max-h-[640px];
+}
+.games > .highscore {
+  @apply overflow-scroll;
+}
+#gameCanvas {
+  @apply w-full;
+  max-height: 640px;
+  background-image: url("~/assets/images/download.png");
+  background-size: 100% 100%;
+  border: 1px solid black;
   @apply rounded-lg;
 }
 </style>
