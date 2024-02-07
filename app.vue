@@ -24,11 +24,18 @@
 <script setup>
 const modeView = ref("dark");
 
-const changeModeView = (e) => {
+const changeModeView = () => {
   // console.log(e);
-  if (modeView.value === "dark") return (modeView.value = "light");
-  else return (modeView.value = "dark");
+  if (modeView.value === "dark") modeView.value = "light";
+  else modeView.value = "dark";
+  localStorage.setItem("mode-view", modeView.value);
 };
+
+onMounted(() => {
+  const mode = localStorage.getItem("mode-view");
+  console.log(mode);
+  if (mode) return (modeView.value = mode);
+});
 </script>
 
 <style>

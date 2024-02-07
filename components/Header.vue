@@ -3,7 +3,7 @@
     <div class="icon-menu">
       <a class="title" href="/">
         <img src="../assets/icon.png" alt="" width="50" />
-        <span class="title">The Boring Game</span>
+        <span class="text-secondary">The Boring Games</span>
       </a>
 
       <div class="menu">
@@ -35,7 +35,7 @@
         classTitleButton="hidden lg:block"
         :iconFlag="selectedLang"
         :buttonSection="buttonActiveLang()"
-        classButton="flex gap-3 items-center text-base bg-gray-800 text-white px-3 py-2"
+        classButton="flex gap-3 items-center text-base bg-secondary text-white px-3 py-2"
       >
         <div
           v-for="(lang, index) in langList"
