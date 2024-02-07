@@ -26,7 +26,7 @@
                 max="90"
                 v-model="valueAngle"
                 :onchange="() => updateCanon()"
-                class="range range-primary range-md"
+                class="range range-secondary range-md"
                 :disabled="tembak"
               />
               <input
@@ -40,14 +40,14 @@
               />
             </div>
             <button
-              class="bg-blue-500 rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
+              class="bg-blue-500 text-white rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
               :onclick="() => fire()"
               :disabled="tembak"
             >
               Shoot
             </button>
             <button
-              class="bg-blue-500 rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
+              class="bg-blue-500 text-white rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
               :onclick="() => startGame()"
             >
               Restart

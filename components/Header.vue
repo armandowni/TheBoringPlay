@@ -3,7 +3,7 @@
     <div class="icon-menu">
       <a class="title" href="/">
         <img src="../assets/icon.png" alt="" width="50" />
-        <span class="text-secondary">The Boring Game</span>
+        <span class="title">The Boring Game</span>
       </a>
 
       <div class="menu">
@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="flex justify-center items-center gap-6">
-      <label className="swap swap-rotate bg-secondary border-2 rounded-full p-3">
+      <label
+        className="swap swap-rotate bg-secondary border-2 rounded-full p-3"
+      >
         <input
           type="checkbox"
           value="dark"
@@ -118,6 +120,9 @@ init();
   @apply flex-row;
   @apply gap-3;
   @apply text-xl;
+}
+.header > .icon-menu > .menu > a {
+  @apply text-secondary;
 }
 .header > .icon-menu > .title {
   @apply flex;

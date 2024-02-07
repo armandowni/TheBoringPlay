@@ -129,5 +129,6 @@ const aboutus = [
 .home > .aboutSection > .about-us-list > .about-us-card > .icon > .icon-card {
   @apply cursor-pointer;
   @apply text-5xl;
+  @apply text-white;
 }
 </style>
