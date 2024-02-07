@@ -33,7 +33,7 @@ const changeModeView = () => {
 
 onMounted(() => {
   const mode = localStorage.getItem("mode-view");
-  console.log(mode);
+  // console.log(mode);
   if (mode) return (modeView.value = mode);
 });
 </script>
