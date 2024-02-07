@@ -12,7 +12,7 @@
           </td>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-secondary">
         <tr
           v-for="(data, index) in dataTable"
           v-bind:key="index"
@@ -21,7 +21,7 @@
           <td
             v-for="(header, indexHeader) in dataHeaders"
             v-bind:key="indexHeader"
-            class="py-3 px-5 text-black"
+            class="py-3 px-5"
           >
             {{ data[header?.key] }}
           </td>

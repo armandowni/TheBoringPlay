@@ -2,9 +2,9 @@
   <div class="home">
     <div class="landingSection">
       <div class="title">
-        <span class="text-white">{{ $t("HomeTitle") }}</span>
+        <span class="text-primary">{{ $t("HomeTitle") }}</span>
         <span class="text-base font-normal">{{ $t("HomeDesc") }}</span>
-        <a href="/collection" class="font-normal">
+        <a href="/collection" class="font-normal text-secondary">
           <font-awesome-icon icon="fas fa-arrow-right" class="cursor-pointer" />
           {{ $t("BtnCollection") }}
         </a>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="aboutSection">
-      <h1>{{ $t("AboutUsTitle") }}</h1>
+      <h1 class="text-secondary">{{ $t("AboutUsTitle") }}</h1>
       <div class="about-us-list">
         <div
           class="about-us-card"
@@ -72,8 +72,7 @@ const aboutus = [
   @apply justify-center;
   @apply items-center;
   @apply gap-3;
-  @apply bg-white;
-  @apply text-black;
+  @apply bg-primary;
   @apply rounded-xl;
   @apply text-center;
   @apply my-5;
@@ -83,10 +82,9 @@ const aboutus = [
   @apply cursor-pointer;
 }
 .home > .aboutSection {
-  @apply bg-white;
+  @apply bg-primary;
   @apply rounded-lg;
   @apply p-5;
-  @apply text-black;
 }
 .home > .aboutSection > h1 {
   @apply text-4xl;
@@ -103,20 +101,30 @@ const aboutus = [
 }
 .home > .aboutSection > .about-us-list > .about-us-card {
   @apply flex;
+  @apply flex-col;
+  @apply lg:flex-row;
   @apply items-center;
   @apply gap-5;
-  @apply flex-row;
   @apply border-2;
   @apply rounded-xl;
+  @apply text-center;
+  @apply lg:text-left;
 }
 .home > .aboutSection > .about-us-list > .about-us-card > .icon {
   @apply bg-blue-500;
-  @apply h-80;
-  @apply px-3;
+  @apply w-full;
+  @apply h-40;
+  @apply lg:h-96;
+  @apply p-0;
+  @apply lg:px-3;
   @apply flex;
   @apply rounded-l-lg;
   @apply justify-center;
   @apply items-center;
+}
+.home > .aboutSection > .about-us-list > .about-us-card > .desc {
+  @apply p-3;
+  @apply text-secondary;
 }
 .home > .aboutSection > .about-us-list > .about-us-card > .icon > .icon-card {
   @apply cursor-pointer;

@@ -1,15 +1,15 @@
 <template>
   <div class="text-right">
     <Menu as="div" class="relative inline-block text-left">
-      <div>
-        <MenuButton :class="`w-full justify-center rounded-md ${classButton}`">
-          <country-flag
-            :country="iconFlag"
-            style="border: 1px solid black; margin-top: -8px"
-          />
-          {{ buttonSection }}
-        </MenuButton>
-      </div>
+      <MenuButton
+        :class="`w-full justify-center items-center rounded-md ${classButton} p-6 lg:py-4 lg:px-5`"
+      >
+        <country-flag
+          :country="iconFlag"
+          style="border: 1px solid black; margin-top: -8px"
+        />
+        <span :class="`${classTitleButton}`">{{ buttonSection }}</span>
+      </MenuButton>
 
       <transition
         enter-active-class="transition duration-100 ease-out"
@@ -36,6 +36,7 @@ import { defineProps } from "vue";
 const props = defineProps({
   buttonSection: String,
   classButton: String,
+  classTitleButton: String,
   iconFlag: String,
 });
 </script>

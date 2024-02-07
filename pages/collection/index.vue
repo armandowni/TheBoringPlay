@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col justify-center items-center text-white">
-    <span class="text-4xl font-bold text-center">{{ $t("CollectionMenu") }}</span>
+  <div class="flex flex-col justify-center items-center text-primary">
+    <span class="text-4xl font-bold text-center">{{
+      $t("CollectionMenu")
+    }}</span>
     <div class="collectionGames">
       <div
         class="collectionGames-card"
@@ -20,6 +22,7 @@
           <a
             :href="game.gameUrl"
             class="bg-white px-3 py-5 text-black rounded-lg text-sm"
+            v-if="!game?.gameName?.includes('coming')"
           >
             Play Now
           </a>

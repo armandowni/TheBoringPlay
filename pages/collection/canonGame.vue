@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center items-center gap-3 w-full text-white"
+    class="flex flex-col justify-center items-center gap-3 w-full text-primary"
   >
     <span class="text-4xl font-bold text-center">Canon Game</span>
     <div class="games">
@@ -8,7 +8,7 @@
         <canvas id="gameCanvas" width="640" height="400"></canvas>
         <div class="flex" id="actions">
           <button
-            class="bg-blue-500 rounded-lg px-3 py-2 w-full"
+            class="bg-blue-500 text-white rounded-lg px-3 py-2 w-full"
             v-if="berhenti"
             v-on:click="() => startGame()"
           >
@@ -27,21 +27,30 @@
                 v-model="valueAngle"
                 :onchange="() => updateCanon()"
                 class="range range-primary range-md"
+                :disabled="tembak"
               />
               <input
                 type="number"
                 min="0"
                 max="90"
                 v-model="valueAngle"
+                :disabled="tembak"
                 :onchange="() => updateCanon()"
                 class="px-5 text-center bg-white text-black border-2 rounded-lg border-black"
               />
             </div>
             <button
-              class="bg-blue-500 rounded-lg px-3 py-2 flex-1"
+              class="bg-blue-500 rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
               :onclick="() => fire()"
+              :disabled="tembak"
             >
               Shoot
+            </button>
+            <button
+              class="bg-blue-500 rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
+              :onclick="() => startGame()"
+            >
+              Restart
             </button>
           </div>
         </div>
@@ -80,21 +89,17 @@ let timer = null;
 
 // boolean var
 const berhenti = ref(true);
-let hit = false;
-let tembak = false;
-
-// another var
+const tembak = ref(false);
 const valueAngle = ref(0);
 let Angle = true;
 let score = 0;
-let rule = "";
+let tembakan = null;
 
 // character
 let cannon = null;
 let target = null;
 let bullet = null;
-const speedX = 0;
-const speedY = 0;
+
 const xBird = () => Math.floor(Math.random() * 200) + 200;
 const yBird = () => Math.floor(Math.random() * 200) + 100;
 
@@ -138,6 +143,11 @@ function startGame() {
   }
   Angle = false;
   berhenti.value = false;
+  valueAngle.value = 0;
+  tembak.value = false;
+  score = 0;
+  clearInterval(tembakan);
+  utility();
   myGameArea.start(gameCanvas());
   clock();
 }
@@ -149,15 +159,14 @@ function clock() {
       printClock(waktu);
       if (waktu == -1) {
         // console.log(waktu);
-        score = 0;
-        valueAngle.value = 0;
         berhenti.value = true;
-        tembak = false;
-        hit = false;
+        valueAngle.value = 0;
+        addDataPlayer(score);
+        score = 0;
+        tembak.value = false;
         clearInterval(timer);
         viewGame();
         bullet.update();
-        // addDataPlayer(score);
       } else {
         waktu--;
       }
@@ -174,30 +183,20 @@ function printClock(second) {
 
 // view and add data player
 
-function addDataPlayer(score) {
+async function addDataPlayer(score) {
   if (confirm("Are you sure you want to save your highscore?")) {
-    let nama = prompt("Enter your name: ");
+    const nama = prompt("Enter your name: ");
 
-    let addData = {
+    const addData = {
       username: nama,
       score: score,
     };
-
-    // axios
-    //   .post(
-    //     restApi.globalStorage + "/api/highscorecanons/addDataPlayer",
-    //     addData
-    //   )
-    //   .then((result) => {
-    //     let results = result.statusText;
-    //     if (results === "OK") {
-    //       alert(result.data.Data);
-    //       viewGame();
-    //     } else {
-    //       alert("Can't save data, please wait or refresh the page");
-    //       viewGame();
-    //     }
-    //   });
+    await fetchData("/canonGames", "post", {}, addData)
+      .then(() => {
+        alert("Done Save, Thank you for playing");
+        getDataHighScore();
+      })
+      .catch((err) => console.log(err));
   } else {
     alert("okay no problemo");
   }
@@ -277,6 +276,7 @@ function componentScore(Canvas, width, height, color, xTemp, yTemp, type) {
   const ctx = Canvas.getContext("2d");
   let x = xTemp;
   let y = yTemp;
+  const radius = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
 
   const update = function (text, xUpdate, yUpdate) {
     x = xUpdate || x;
@@ -286,18 +286,20 @@ function componentScore(Canvas, width, height, color, xTemp, yTemp, type) {
       ctx.fillStyle = color;
       ctx.fillText(text, x, y);
     } else if (type == "image") {
-      // console.log(xUpdate);
-      // ctx.drawImage(image, x, y, width, height);
+      // console.log("new x :", x);
+      ctx.drawImage(image, x, y, width, height);
     } else {
       ctx.fillStyle = color;
       ctx.fillRect(x, y, width, height);
     }
+
+    return { update, clr, text: "", x, y, width, height, radius };
   };
 
   const clr = function () {
     ctx.clearRect(247, 180, 115, 30);
   };
-  return { update, clr, text: "", x, y };
+  return { update, clr, text: "", x, y, width, height, radius };
 }
 function componentCanon(gameCanvas, width, height, color, xTemp, yTemp) {
   // function for draw rect,circle,and many more
@@ -327,9 +329,11 @@ function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
   // function for draw rect,circle,and many more
 
   const BulletSpeed = 8;
-  const gravity = 10;
+  const gravity = 0.14;
+  let velocityY = -1;
   let x = xTemp;
   let y = yTemp;
+  const radius = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
   const ctx = gameCanvas.getContext("2d");
 
   const update = function (xUpdate, yUpdate) {
@@ -356,7 +360,9 @@ function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
     width,
     height,
     BulletSpeed,
+    radius,
     gravity,
+    velocityY,
   };
 }
 
@@ -364,11 +370,11 @@ function componentBullet(gameCanvas, width, height, color, xTemp, yTemp) {
 
 // updateGameArea
 function updateGameArea() {
-  const text = "SCORE: " + score;
   myGameArea.clear(gameCanvas());
+  const text = "SCORE: " + score;
+  myScore.update(text);
   ground.update();
   target.update();
-  myScore.update(text);
   printCannonChar(cannon.meriam.calculateAngle(valueAngle.value));
   bullet.update();
 }
@@ -385,67 +391,57 @@ function printCannonChar(angle) {
 
 function updateCanon() {
   const degree = valueAngle.value;
-  if (degree > 90) {
-    rule = "You cannon input greater than 90 degree ";
-  } else if (degree < 0) {
-    rule = "You should input greater than 0 degree ";
-  } else {
-    rule = "";
-    cannon.meriam.clr();
-    const angleCannon = cannon.meriam.calculateAngle(degree);
-    printCannonChar(angleCannon);
-    bullet.update(cannon.meriam.x, cannon.meriam.y);
-  }
+  cannon.meriam.clr();
+  const angleCannon = cannon.meriam.calculateAngle(degree);
+  printCannonChar(angleCannon);
+  bullet.update(cannon.meriam.x, cannon.meriam.y);
 }
 // end cannon function
 
 // peluru function
 
 function fire() {
-  tembak = true;
+  tembak.value = true;
   Angle = true;
   peluru();
 }
 
+function isCollision(obj1, obj2) {
+  return (
+    obj1.x - obj1.radius >= obj2.x &&
+    obj1.x + obj1.radius <= obj2.x + obj2.width &&
+    obj1.y - obj1.radius >= obj2.y &&
+    obj1.y + obj1.radius <= obj2.y + obj2.height
+  );
+}
+
 function peluru() {
-  if (tembak == false) {
+  // console.log(target.x, target.y);
+  if (tembak.value == false) {
     bullet.x = 80;
     bullet.update();
   } else {
-    let tembakan = setInterval(function () {
-      const myleft = bullet.x;
-      const myright = bullet.x + bullet.width;
-      const mytop = bullet.y;
-      const mybottom = bullet.y + bullet.height;
-      const otherleft = target.x + 15;
-      const otherright = target.x + target.width;
-      const othertop = target.y + 15;
-      const otherbottom = target.y + target.height;
+    tembakan = setInterval(function () {
       let crash = true;
-      if (
-        mybottom < othertop ||
-        mytop > otherbottom ||
-        myright < otherleft ||
-        myleft > otherright
-      ) {
+      if (!isCollision(bullet, target)) {
         crash = false;
       }
       if (bullet.x >= 640 || bullet.y >= ground.y - 10 || bullet.y <= 0) {
         bullet.x = cannon.meriam.x;
         bullet.y = cannon.meriam.y;
-        tembak = false;
+        bullet.velocityY = -1;
+        tembak.value = false;
         Angle = false;
         bullet.update(cannon.meriam.x, bullet.y);
         clearInterval(tembakan);
       } else if (crash == true) {
-        // console.log("Kena");
         bullet.x = cannon.meriam.x;
         bullet.y = cannon.meriam.y;
-        tembak = false;
+        bullet.velocityY = -1;
+        tembak.value = false;
         score += 100;
-        hit = true;
         Angle = false;
-        target.update("", xBird(), yBird());
+        target = target.update("", xBird(), yBird());
         bullet.update(bullet.x, bullet.y);
         myScore.update(score);
         clearInterval(tembakan);
@@ -455,11 +451,13 @@ function peluru() {
           (cannon.meriam.calculateAngle(valueAngle.value) * 3.14) / 90;
         bullet.x += Math.cos(rotation) * bullet.BulletSpeed;
         bullet.y += Math.sin(rotation) * bullet.BulletSpeed;
-        if (bullet.y < 100) bullet.y += bullet.gravity;
-        console.log(bullet);
+
+        bullet.y += bullet.velocityY;
+        bullet.velocityY += bullet.gravity;
+
         bullet.update(bullet.x, bullet.y);
       }
-    }, 50);
+    }, 40);
   }
 }
 // end peluru
@@ -477,7 +475,7 @@ onMounted(() => {
   @apply w-full;
   @apply justify-between;
   @apply gap-10;
-  @apply bg-white;
+  @apply bg-primary;
   @apply p-5;
   @apply rounded-lg;
   @apply h-full;

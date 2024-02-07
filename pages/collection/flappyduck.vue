@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center items-center gap-3 w-full text-white"
+    class="flex flex-col justify-center items-center gap-3 w-full text-primary"
   >
     <span class="text-4xl font-bold text-center">Flappy Duck</span>
     <div class="games">
@@ -21,7 +21,7 @@
           >
             <button
               class="bg-blue-500 rounded-lg px-3 py-2 flex-1"
-              :onclick="() => fire()"
+              :onclick="() => jump()"
             >
               Jump
             </button>
@@ -48,22 +48,27 @@ const header = [
 // gameCanvas
 const gameCanvas = () => document.getElementById("gameCanvas");
 let frameNo = 0;
+let interval = 0;
 const myGameArea = {
   start: function (gameCanvas) {
-    width = gameCanvas.width = 640;
-    height = gameCanvas.height = 400;
+    gameCanvas.width = 640;
+    gameCanvas.height = 400;
     frameNo = 0;
     interval = null;
+
+    return { width: gameCanvas.width, height: gameCanvas.height };
   },
   view: function (gameCanvas) {
     gameCanvas.width = 640;
     gameCanvas.height = 400;
-    const context = gameCanvas().getContext("2d");
+    const context = gameCanvas.getContext("2d");
     context.filter = "grayscale(50)";
     frameNo = 0;
     interval = null;
+    return { width: gameCanvas.width, height: gameCanvas.height };
   },
   clear: function (gameCanvas) {
+    const context = gameCanvas.getContext("2d");
     context.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   },
   stop: function () {
@@ -80,6 +85,7 @@ const highscore = ref([]);
 const items = ["Highscore Top 50"];
 let tab = null;
 let loadData = true;
+
 async function getDataHighScore() {
   const result = await fetchData("/flappyDuckGames", "get");
   //   console.log(result);
@@ -88,41 +94,44 @@ async function getDataHighScore() {
 
 function viewGame() {
   myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+  myGamePiece = new component(50, 50, imageDuck, 10, 150, "image");
+  myObstacles = [];
   myObstacles.push(new component(50, 160, "green", 500, 0));
   myObstacles.push(new component(50, 160, "green", 500, 250));
-  myGamePiece = new component(50, 50, imageDuck, 10, 150, "image");
 
   // const canvas = gameCanvas();
-  // myGameArea.view(canvas);
+  myGameArea.view(gameCanvas());
   const text = "SCORE: " + frameNo;
-  myGamePiece.update();
   myScore.update(text);
+  myGamePiece.update();
   myObstacles[0].update();
   myObstacles[1].update();
 }
 function startGame() {
-  myGamePiece = new component(50, 50, duck, 10, 150, "image");
-  myGamePiece.gravity = 0.05;
-  myScore = new component("30px", "Consolas", "black", 280, 40, "text");
-  disableBtnJump = false;
-  disableBtnStart = true;
+  myObstacles = [];
   myGameArea.start(gameCanvas());
-  myGameArea.interval = setInterval(updateGameArea, 20);
-  // addGamePlayed();
+  myObstacles.push(new component(50, 160, "green", 500, 0));
+  myObstacles.push(new component(50, 160, "green", 500, 250));
+  myObstacles[0].update();
+  myObstacles[1].update();
+  myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+  myGamePiece = new component(50, 50, imageDuck, 10, 150, "image");
+  berhenti.value = false;
+  interval = setInterval(updateGameArea, 20);
 }
 function component(width, height, color, xTemp, yTemp, type) {
   const image = new Image();
   if (type == "image") {
     image.src = color;
   }
-  width = width;
-  height = height;
 
   let x = xTemp;
   let y = yTemp;
-  const gravity = 0;
+  let gravity = 0.05;
   let gravitySpeed = 0;
-  const update = function (text) {
+  const update = function (text, xUpdate, yUpdate) {
+    x = xUpdate || x;
+    y = yUpdate || y;
     const ctx = gameCanvas().getContext("2d");
     if (type == "text") {
       ctx.font = width + " " + height;
@@ -135,7 +144,9 @@ function component(width, height, color, xTemp, yTemp, type) {
       ctx.fillRect(x, y, width, height);
     }
   };
-  const newPos = function () {
+  const newPos = function (gravityUpdate) {
+    setTimeout(() => (gravity = 0.05), 1);
+    gravity = gravityUpdate || gravity;
     gravitySpeed += gravity;
     x += speedX;
     y += speedY + gravitySpeed;
@@ -143,7 +154,7 @@ function component(width, height, color, xTemp, yTemp, type) {
     hitTop();
   };
   const hitBottom = function () {
-    let rockbottom = myGameArea.height - height;
+    const rockbottom = gameCanvas().height - height;
     if (y > rockbottom) {
       y = rockbottom;
       gravitySpeed = 0;
@@ -157,48 +168,53 @@ function component(width, height, color, xTemp, yTemp, type) {
     }
   };
   const crashWith = function (otherobj) {
-    let myleft = x + 15;
-    let myright = x + width - 10;
-    let mytop = y + 15;
-    let mybottom = y + height - 10;
-    let otherleft = otherobj.x;
-    let otherright = otherobj.x + otherobj.width;
-    let othertop = otherobj.y;
-    let otherbottom = otherobj.y + otherobj.height;
-    let crash = true;
+    const myleft = x + 15;
+    const myright = x + width - 10;
+    const mytop = y + 15;
+    const mybottom = y + height - 10;
+    const otherleft = otherobj.x;
+    const otherright = otherobj.x + otherobj.width;
+    const othertop = otherobj.y;
+    const otherbottom = otherobj.y + otherobj.height;
+
+    const rockbottom = gameCanvas().height - height;
+    const top = 0.4;
+    if (y < top) return true;
+    if (y >= rockbottom) return true;
+
     if (
       mybottom < othertop ||
       mytop > otherbottom ||
       myright < otherleft ||
       myleft > otherright
-    ) {
-      crash = false;
-    }
-    return crash;
+    )
+      return false;
+
+    return true;
   };
 
-  return { update, newPos, crashWith };
+  return { update, newPos, crashWith, x, y, width, height, gravity };
 }
 
 function updateGameArea() {
   let x, height, gap, minHeight, maxHeight, minGap, maxGap;
   for (let i = 0; i < myObstacles.length; i += 1) {
     if (myGamePiece.crashWith(myObstacles[i])) {
-      // addDataPlayer(myGameArea.frameNo);
-      myGameArea.stop();
-      myObstacles = [];
-      myObstacles.push(new component(50, 160, "green", 500, 0));
-      myObstacles.push(new component(50, 160, "green", 500, 250));
-      disableBtnJump = true;
-      disableBtnStart = false;
+      addDataPlayer(frameNo);
+      frameNo = 0;
+      myGameArea.stop(gameCanvas());
+      myGameArea.clear(gameCanvas());
+      berhenti.value = true;
+      const text = "SCORE: " + frameNo;
+      myScore.update(text);
+      viewGame();
       return;
     }
   }
   myGameArea.clear(gameCanvas());
   frameNo += 1;
   if (frameNo == 1 || everyinterval(150)) {
-    // console.log("width:" + myGameArea.width);
-    x = myGameArea.width;
+    x = gameCanvas().width;
     minHeight = 20;
     maxHeight = 200;
     height = Math.floor(
@@ -214,10 +230,11 @@ function updateGameArea() {
   }
   for (let i = 0; i < myObstacles.length; i += 1) {
     myObstacles[i].x += -1;
-    myObstacles[i].update();
+    myObstacles[i].update("", myObstacles[i].x, myObstacles[i].y);
   }
-  myScore.text = "SCORE: " + frameNo;
-  myScore.update();
+
+  const text = "SCORE: " + frameNo;
+  myScore.update(text);
   myGamePiece.newPos();
   myGamePiece.update();
 }
@@ -227,34 +244,24 @@ function everyinterval(n) {
   }
   return false;
 }
-function jump(n) {
-  myGamePiece.gravity = n;
-  // console.log("jump game");
+function jump() {
+  myGamePiece.newPos(-1.5);
 }
 
-function addDataPlayer(score) {
+async function addDataPlayer(score) {
   if (confirm("Are you sure you want to save your highscore?")) {
-    let nama = prompt("Enter your name: ");
-    let addData = {
+    const nama = prompt("Enter your name: ");
+    const addData = {
       username: nama,
       score: score,
     };
     // console.log(addData);
-    // axios
-    //   .post(
-    //     restApi.globalStorage + "/api/highscoreflappyducks/addDataPlayer",
-    //     addData
-    //   )
-    //   .then((result) => {
-    //     let results = result.statusText;
-    //     if (results === "OK") {
-    //       alert(result.data.Data);
-    //       viewGame();
-    //     } else {
-    //       alert("Can't save data, please wait or refresh the page");
-    //       viewGame();
-    //     }
-    //   });
+    await fetchData("/flappyDuckGames", "post", {}, addData)
+      .then(() => {
+        alert("Done Save, Thank you for playing");
+        getDataHighScore();
+      })
+      .catch((err) => console.log(err));
   } else {
     alert("okay no problemo");
   }
@@ -274,7 +281,7 @@ onMounted(() => {
   @apply w-full;
   @apply justify-between;
   @apply gap-3;
-  @apply bg-white;
+  @apply bg-primary;
   @apply p-5;
   @apply rounded-lg;
   @apply h-full;

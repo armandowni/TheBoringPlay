@@ -1,30 +1,69 @@
 <template>
-  <div class="layout">
-    <Header />
-    <NuxtPage class="content" />
-  </div>
+  <html :data-theme="modeView">
+    <div class="layout">
+      <Header :changeMode="changeModeView" />
+      <div class="content">
+        <NuxtPage />
+      </div>
+      <div class="bottomBar">
+        <div class="menu">
+          <a href="/">
+            <font-awesome-icon icon="fas fa-home" class="icon-card" />
+            {{ $t("HomeMenu") }}
+          </a>
+          <a href="/collection">
+            <font-awesome-icon icon="fas fa-bars" class="icon-card" />
+            {{ $t("CollectionMenu") }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </html>
 </template>
 
-<script setup lang="ts">
-let load = false;
-let page = "";
-let breakpointSize = 0;
+<script setup>
+const modeView = ref("dark");
 
-function checkDisplays() {}
-function checkRouteName() {
-  page = "test";
-}
-function doLoading() {
-  // this.load = false;
-  // setTimeout(() => {
-  //   this.load = true;
-  // }, 2000);
-}
+const changeModeView = (e) => {
+  // console.log(e);
+  if (modeView.value === "dark") return (modeView.value = "light");
+  else return (modeView.value = "dark");
+};
 </script>
 
 <style>
 .content {
   @apply px-10;
   @apply py-10;
+}
+.title-page::first-letter {
+  @apply uppercase;
+}
+
+.bottomBar {
+  @apply block;
+  @apply lg:hidden;
+  @apply sticky;
+  @apply w-full;
+  @apply bottom-0;
+  @apply bg-primary;
+  @apply text-secondary;
+  @apply rounded-t-lg;
+  @apply py-2;
+}
+.bottomBar > .menu {
+  @apply flex;
+  @apply flex-row;
+  @apply justify-around;
+  @apply items-center;
+}
+.bottomBar > .menu > a {
+  @apply flex;
+  @apply flex-col;
+  @apply justify-center;
+  @apply items-center;
+  @apply text-center;
+  @apply gap-1;
+  @apply text-xl;
 }
 </style>

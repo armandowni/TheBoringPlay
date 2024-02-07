@@ -13,6 +13,24 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#2a323c",
+          secondary: "white",
+        },
+      },
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
+          primary: "white",
+          secondary: "#2a323c",
+        },
+      },
+    ],
+  },
   variants: {
     transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
     extend: {
