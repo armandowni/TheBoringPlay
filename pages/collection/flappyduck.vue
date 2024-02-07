@@ -12,7 +12,7 @@
             v-if="berhenti"
             v-on:click="() => startGame()"
           >
-            Start Game
+            {{ $t("startBtn") }}
           </button>
 
           <div
@@ -23,7 +23,7 @@
               class="bg-blue-500 rounded-lg px-3 py-2 flex-1"
               :onclick="() => jump()"
             >
-              Jump
+              {{ $t("jumptBtn") }}
             </button>
           </div>
         </div>

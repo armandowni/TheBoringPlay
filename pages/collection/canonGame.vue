@@ -12,7 +12,7 @@
             v-if="berhenti"
             v-on:click="() => startGame()"
           >
-            Start Game
+            {{ $t("startBtn") }}
           </button>
 
           <div
@@ -44,13 +44,13 @@
               :onclick="() => fire()"
               :disabled="tembak"
             >
-              Shoot
+              {{ $t("fireBtn") }}
             </button>
             <button
               class="bg-blue-500 text-white rounded-lg px-3 py-2 flex-1 disabled:bg-gray-400 disabled:text-black disabled:cursor-not-allowed"
               :onclick="() => startGame()"
             >
-              Restart
+              {{ $t("restartBtn") }}
             </button>
           </div>
         </div>
