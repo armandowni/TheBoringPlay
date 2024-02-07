@@ -41,8 +41,8 @@
           v-for="(lang, index) in langList"
           :class="`flex gap-5 px-5 py-3 cursor-pointer items-center ${
             selectedLang === lang?.lang
-              ? 'bg-gray-800 text-white rounded-sm'
-              : null
+              ? 'bg-[#2a323c] text-white rounded-sm'
+              : 'text-black'
           }`"
           :key="index"
           :onclick="() => selectLang(lang)"
