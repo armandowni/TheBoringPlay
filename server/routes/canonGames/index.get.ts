@@ -7,7 +7,7 @@ export default defineEventHandler(async () => {
     const data = await api.get("/highscorecanons/getAllData");
     // console.log(data);
 
-    return data.Data?.map((dataHighScore: any, index: number) => ({
+    return data.data?.map((dataHighScore: any, index: number) => ({
       ...dataHighScore,
       no: index + 1,
     }));

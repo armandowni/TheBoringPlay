@@ -11,7 +11,7 @@ export function useApi(baseUrl: string, config?: any) {
 
   // console.log(configNuxt);
 
-  const base_path = `${baseUrl}/api`;
+  const base_path = `${baseUrl}/api/${API_VER}`;
 
   const get = async (url: string, query?: string) => {
     const path = base_path + url;

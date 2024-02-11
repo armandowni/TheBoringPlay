@@ -78,6 +78,15 @@ async function getDataHighScore() {
   //   console.log(result);
   highscore.value = result;
 }
+async function addGamePlayed() {
+  const result = await $fetch("/collectionGames", {
+    method: "post",
+    body: {
+      name: "Canon Game",
+    },
+  });
+  // console.log("masuk sini",result);
+}
 // gameCanvas
 const gameCanvas = () => document.getElementById("gameCanvas");
 
@@ -113,6 +122,7 @@ let myGameArea = {
     gameCanvas.height = 400;
     const context = gameCanvas.getContext("2d");
     context.filter = "grayscale(0)";
+
     waktu = 60;
   },
   view: function (gameCanvas) {
@@ -150,6 +160,7 @@ function startGame() {
   utility();
   myGameArea.start(gameCanvas());
   clock();
+  addGamePlayed();
 }
 
 // clock function

@@ -23,7 +23,7 @@
               class="bg-blue-500 rounded-lg px-3 py-2 flex-1"
               :onclick="() => jump()"
             >
-              {{ $t("jumptBtn") }}
+              {{ $t("jumpBtn") }}
             </button>
           </div>
         </div>
@@ -91,6 +91,15 @@ async function getDataHighScore() {
   //   console.log(result);
   highscore.value = result;
 }
+async function addGamePlayed() {
+  const result = await $fetch("/collectionGames", {
+    method: "post",
+    body: {
+      name: "Flappy Duck",
+    },
+  });
+  console.log("masuk sini",result);
+}
 
 function viewGame() {
   myScore = new component("30px", "Consolas", "black", 280, 40, "text");
@@ -118,6 +127,7 @@ function startGame() {
   myGamePiece = new component(50, 50, imageDuck, 10, 150, "image");
   berhenti.value = false;
   interval = setInterval(updateGameArea, 20);
+  addGamePlayed();
 }
 function component(width, height, color, xTemp, yTemp, type) {
   const image = new Image();

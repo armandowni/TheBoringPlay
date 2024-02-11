@@ -39,7 +39,7 @@ const collectionGames = ref([]);
 
 async function getDataCollection() {
   const result = await fetchData("/collectionGames", "get");
-  collectionGames.value = result?.Data;
+  collectionGames.value = result?.data[0];
 }
 
 function initPages() {
