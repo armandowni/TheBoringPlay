@@ -35,7 +35,7 @@
         classTitleButton="hidden lg:block"
         :iconFlag="selectedLang"
         :buttonSection="buttonActiveLang()"
-        classButton="flex gap-3 items-center text-base bg-secondary text-white px-3 py-2"
+        classButton="flex gap-3 items-center text-base bg-secondary text-primary px-3 py-2"
       >
         <div
           v-for="(lang, index) in langList"

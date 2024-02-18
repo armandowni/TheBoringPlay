@@ -19,7 +19,34 @@
             class="flex flex-col justify-center gap-5 w-full"
             v-else-if="!berhenti"
           >
-            <div></div>
+            <div class="flex flex-col justify-center items-center gap-4">
+              <button
+                class="text-white w-10 h-10 bg-blue-500 rounded-lg"
+                :onclick="button.up"
+              >
+                <font-awesome-icon icon="fas fa-arrow-up" />
+              </button>
+              <div class="flex justify-center items-center gap-16">
+                <button
+                  class="text-white w-10 h-10 bg-blue-500 rounded-lg"
+                  :onclick="button.left"
+                >
+                  <font-awesome-icon icon="fas fa-arrow-left" />
+                </button>
+                <button
+                  class="text-white w-10 h-10 bg-blue-500 rounded-lg"
+                  :onclick="button.right"
+                >
+                  <font-awesome-icon icon="fas fa-arrow-right" />
+                </button>
+              </div>
+              <button
+                class="text-white w-10 h-10 bg-blue-500 rounded-lg"
+                :onclick="button.down"
+              >
+                <font-awesome-icon icon="fas fa-arrow-down" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -39,7 +66,7 @@ const header = [
   { name: "Score", key: "score" },
 ];
 const highscore = ref([]);
-const berhenti = ref(true);
+const berhenti = ref(false);
 let waktu = 60;
 
 async function getDataHighScore() {
@@ -51,7 +78,7 @@ async function addGamePlayed() {
   const result = await $fetch("/collectionGames", {
     method: "post",
     body: {
-      name: "Canon Game",
+      name: "Snake Game",
     },
   });
 }
@@ -105,6 +132,7 @@ function viewGame() {
 }
 
 function startGame() {
+  addGamePlayed();
   snake = new Snake();
   fruit = new Fruit();
   berhenti.value = false;
