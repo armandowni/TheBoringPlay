@@ -66,7 +66,7 @@ const header = [
   { name: "Score", key: "score" },
 ];
 const highscore = ref([]);
-const berhenti = ref(false);
+const berhenti = ref(true);
 let waktu = 60;
 
 async function getDataHighScore() {
