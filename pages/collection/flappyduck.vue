@@ -262,7 +262,7 @@ async function addDataPlayer(score) {
   if (confirm("Are you sure you want to save your highscore?")) {
     const nama = prompt("Enter your name: ");
     const addData = {
-      username: nama,
+      name: nama,
       score: score,
     };
     // console.log(addData);

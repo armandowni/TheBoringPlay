@@ -199,7 +199,7 @@ async function addDataPlayer(score) {
     const nama = prompt("Enter your name: ");
 
     const addData = {
-      username: nama,
+      name: nama,
       score: score,
     };
     await fetchData("/canonGames", "post", {}, addData)
