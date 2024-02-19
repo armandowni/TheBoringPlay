@@ -12,5 +12,18 @@
   "startBtn": "Start Game",
   "restartBtn": "Restart Game",
   "fireBtn": "Fire",
-  "jumpBtn": "Jump"
+  "jumpBtn": "Jump",
+  "insRepeatGame": "Do this repeatedly until time runs out",
+  "instruction": "Instruction",
+  "insStartGame": "To start the game press the button",
+  "insDoneGame": "After the time is up, you will be given the option to save your score",
+  "insDoneGameYes": "If you select 'yes', you will fill in the name first and then the data will be saved",
+  "insDoneGameNo": "If you select 'no', your score data will not be saved",
+  "insCanonGame1": "To set the cannon, you can use the regular number input or the range button next to the number input",
+  "insCanonGame2": "When you have finished setting, you can press the 'shoot' button",
+  "insDuckGame1": "To make the duck fly, press the 'jump' button",
+  "insDuckGame2": "Pass through existing obstacles, don't get hit by obstacles. If hit, you will die",
+  "insSnakeGame1": "Pick up boxes to get points",
+  "insSnakeGame2": "To direct you can use the arrow buttons at the bottom of the game",
+  "insSnakeGame3": "Apart from that, you can use WASD on your keyboard if you open this game on your laptop"
 }

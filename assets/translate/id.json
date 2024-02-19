@@ -12,5 +12,18 @@
   "startBtn": "Mulai Permainan",
   "restartBtn": "mulai ulang permainan",
   "fireBtn": "Tembak",
-  "jumpBtn": "lompat"
+  "jumpBtn": "lompat",
+  "insRepeatGame": "Lakukan berulang kali sampai waktu habis",
+  "instruction": "Instruksi",
+  "insStartGame": "Untuk memulai permainan tekan tombol",
+  "insDoneGame": "Setelah waktu habis, anda akan diberikan pilihan untuk menyimpan score anda",
+  "insDoneGameYes": "Jika anda pilih 'yes', anda akan mengisi nama terlebih dahulu lalu data akan tersimpan",
+  "insDoneGameNo": "Jika anda pilih 'no', data score anda tidak akan tersimpan",
+  "insCanonGame1": "Untuk mengatur meriam anda bisa menggunakan input angka biasa atau tombol range yang ada disebelah input angka",
+  "insCanonGame2": "Jika sudah selesai mengatur, anda bisa tekan tombol 'tembak'",
+  "insDuckGame1": "Untuk membuat bebek bisa terbang, tekan tombol 'lompat'",
+  "insDuckGame2": "Lewat obstacle yang ada, jangan sampai terkena obstacle. Jika terkena, kamu akan mati",
+  "insSnakeGame1": "Ambil kotak untuk mendapatkan point",
+  "insSnakeGame2": "Untuk mengarahkan anda bisa menggunakan tombol panah yang ada di bawah game",
+  "insSnakeGame3": "Selain itu, anda bisa menggunakan WASD dikeyboard anda jika anda membuka game ini dilaptop"
 }

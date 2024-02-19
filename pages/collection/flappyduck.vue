@@ -2,9 +2,32 @@
   <div
     class="flex flex-col justify-center items-center gap-3 w-full text-primary"
   >
+    <Modal
+      :title="$t('instruction')"
+      :isDialog="isModalOpen"
+      :closeModal="openCloseModal"
+    >
+      <ul className="steps steps-vertical">
+        <li
+          className="step !text-left"
+          v-for="(data, index) in instructionGame"
+          :key="index"
+        >
+          {{ $t(data.desc) }}
+        </li>
+      </ul>
+    </Modal>
+
     <span class="text-4xl font-bold text-center">Flappy Duck</span>
     <div class="games">
       <div class="flex flex-col gap-3">
+        <button
+          class="bg-blue-500 text-white rounded-lg px-3 py-2 w-full lg:w-52 flex justify-center items-center gap-3"
+          :onclick="openCloseModal"
+        >
+          <font-awesome-icon :icon="'fas fa-circle-info'" class="" />
+          {{ $t("instruction") }}
+        </button>
         <canvas id="gameCanvas" width="640" height="400"></canvas>
         <div class="flex" id="actions">
           <button
@@ -38,12 +61,27 @@
 <script setup>
 import fetchData from "~/util/fetchData";
 import imageDuck from "~/assets/images/flappy_duck-removebg.png";
+import { endGameIns, startGameIns } from "../../util/const";
 
 const header = [
   { name: "No", key: "no" },
   { name: "Players Name", key: "username" },
   { name: "Score", key: "score" },
 ];
+
+const instructionGame = [
+  ...startGameIns,
+  { desc: "insDuckGame1" },
+  { desc: "insDuckGame2" },
+  { desc: "insRepeatGame" },
+  ...endGameIns,
+];
+
+const isModalOpen = ref(false);
+function openCloseModal() {
+  if (isModalOpen.value) return (isModalOpen.value = false);
+  else return (isModalOpen.value = true);
+}
 
 // gameCanvas
 const gameCanvas = () => document.getElementById("gameCanvas");
@@ -98,7 +136,7 @@ async function addGamePlayed() {
       name: "Flappy Duck",
     },
   });
-  console.log("masuk sini",result);
+  console.log("masuk sini", result);
 }
 
 function viewGame() {

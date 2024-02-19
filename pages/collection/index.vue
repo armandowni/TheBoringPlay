@@ -21,7 +21,7 @@
           </span>
           <a
             :href="game.gameUrl"
-            class="bg-white px-3 py-5 text-black rounded-lg text-sm"
+            class="bg-primary px-3 py-5 text-secondary rounded-lg text-sm"
             v-if="!game?.gameName?.includes('coming')"
           >
             Play Now
@@ -92,6 +92,6 @@ initPages();
 }
 .collectionGames > .collectionGames-card:hover > .buttonPlay {
   @apply visible;
-  @apply text-white;
+  @apply text-primary;
 }
 </style>
