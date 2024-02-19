@@ -9,7 +9,7 @@
     >
       <ul className="steps steps-vertical">
         <li
-          className="step !text-left"
+          className="step step-primary text-primary !text-left"
           v-for="(data, index) in instructionGame"
           :key="index"
         >
