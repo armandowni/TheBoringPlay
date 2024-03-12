@@ -43,7 +43,7 @@ async function getDataCollection() {
 }
 
 onMounted(() => {
-  // getDataCollection();
+  getDataCollection();
 });
 
 </script>
