@@ -1,42 +1,41 @@
 <template>
-  <div :data-theme="modeView">
+  <html :data-theme="modeView">
     <div class="layout">
-      <!-- <Header :changeMode="changeModeView" :mode="modeView"/> -->
+      <Header :changeMode="changeModeView" :mode="modeView" />
       <div class="content">
         <NuxtPage />
       </div>
       <div class="bottomBar">
         <div class="menu">
           <a href="/">
-            <!-- <font-awesome-icon icon="fas fa-home" class="icon-card" />
-            {{ $t("HomeMenu") }} -->
+            <font-awesome-icon icon="fas fa-home" class="icon-card" />
+            {{ $t("HomeMenu") }}
           </a>
           <a href="/collection">
-            <!-- <font-awesome-icon icon="fas fa-bars" class="icon-card" />
-            {{ $t("CollectionMenu") }} -->
+            <font-awesome-icon icon="fas fa-bars" class="icon-card" />
+            {{ $t("CollectionMenu") }}
           </a>
         </div>
       </div>
     </div>
-  </div>
+  </html>
 </template>
 
 <script setup>
 const modeView = ref("dark");
 
-// const changeModeView = () => {
-//   // console.log(e);
-//   if (modeView.value === "dark") modeView.value = "light";
-//   else modeView.value = "dark";
-//   localStorage.setItem("mode-view", modeView.value);
-// };
+const changeModeView = () => {
+  // console.log(e);
+  if (modeView.value === "dark") modeView.value = "light";
+  else modeView.value = "dark";
+  localStorage.setItem("mode-view", modeView.value);
+};
 
-// onMounted(() => {
-//   const mode = localStorage.getItem("mode-view");
-//   // console.log(mode);
-//   if (mode) return (modeView.value = mode);
-// });
-
+onMounted(() => {
+  const mode = localStorage.getItem("mode-view");
+  // console.log(mode);
+  if (mode) return (modeView.value = mode);
+});
 </script>
 
 <style>
