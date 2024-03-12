@@ -3,7 +3,7 @@
     <div class="icon-menu">
       <a class="title" href="/">
         <img src="../assets/icon.png" alt="" width="50" />
-        <span class="text-secondary">The Boring Games</span>
+        <span class="text-secondary lg:text-white">The Boring Games</span>
       </a>
 
       <div class="menu">
@@ -17,7 +17,8 @@
       >
         <input
           type="checkbox"
-          value="dark"
+          :value="mode"
+          :checked="mode === 'light'"
           className=" theme-controller"
           :onchange="changeMode"
         />
@@ -63,10 +64,9 @@
 import MenuDropdown from "./MenuDropdown.vue";
 const { locale, setLocale } = useI18n();
 
-import { defineProps } from "vue";
-
 const props = defineProps({
   changeMode: Function,
+  mode: String,
 });
 
 const selectedLang = ref("");
@@ -86,11 +86,9 @@ function buttonActiveLang() {
   return langActive?.title;
 }
 
-function init() {
+onMounted(() => {
   selectLang(locale);
-}
-
-init();
+});
 </script>
 
 <style scoped>

@@ -31,6 +31,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const { dataHeaders, dataTable } = defineProps(["dataHeaders", "dataTable"]);
 </script>

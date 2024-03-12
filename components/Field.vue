@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const { required, title } = defineProps({
   title: String,
   required: Boolean,

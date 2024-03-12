@@ -42,11 +42,10 @@ async function getDataCollection() {
   collectionGames.value = result?.data[0];
 }
 
-function initPages() {
-  getDataCollection();
-}
+onMounted(() => {
+  // getDataCollection();
+});
 
-initPages();
 </script>
 <style>
 .collectionGames {

@@ -510,9 +510,10 @@ function peluru() {
 // end peluru
 
 onMounted(() => {
-  viewGame();
-  getDataHighScore();
+  // viewGame();
+  // getDataHighScore();
 });
+
 </script>
 <style scoped>
 .games {

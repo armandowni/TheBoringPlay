@@ -49,8 +49,7 @@
   </client-only>
 </template>
 
-<script setup lang="ts">
-import { defineProps } from "vue";
+<script setup>
 import {
   TransitionRoot,
   TransitionChild,

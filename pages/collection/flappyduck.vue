@@ -317,9 +317,9 @@ async function addDataPlayer(score) {
 
 onMounted(() => {
   viewGame();
-
-  getDataHighScore();
+  // getDataHighScore();
 });
+
 </script>
 <style scoped>
 .games {

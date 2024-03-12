@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      link: [{ rel: "icon", href: "~/assets/favicon.ico" }],
+      link: [{ rel: "icon", href: "favicon.ico" }],
       title: "The Boring Play",
       meta: [
         {
@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     API_URL: process.env.NUXT_API_SECRET,
   },
   ssr: false,
-  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+  css: ["@fortawesome/fontawesome-svg-core/styles.css","~/assets/global.css"],
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n"],
   i18n: {
     vueI18n: "~/config/translate.ts",

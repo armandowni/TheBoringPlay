@@ -31,7 +31,6 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
-import { defineProps } from "vue";
 
 const props = defineProps({
   buttonSection: String,

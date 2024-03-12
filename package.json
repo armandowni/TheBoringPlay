@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --dotenv .env.local --port 3007",
+    "dev": "nuxt dev --dotenv .env.local --port 3008",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
